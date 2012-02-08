@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ STATIC_URL }}styles.css" />
+    <title>{% block title %}WonderHop{% endblock %}</title>
+</head>
+
+<body class="{% block id %}{% endblock %}">
+<div id="outer">
+<div id="inner">
+    {% block content %}{% endblock %}
+</div>
+</div>
+</body>
+</html>

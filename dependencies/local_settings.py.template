@@ -1,0 +1,14 @@
+
+STATIC_ROOT = "%(django_static_root)s/wonderhop/"
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "wonderhop",
+        "USER": "wonderhop",
+    }
+}
+
+DEBUG = %(debug)s
+TEMPLATE_DEBUG = %(debug)s
+LANDING_PAGE = %(landing)s

@@ -1,0 +1,13 @@
+{% extends "landing.html" %}
+{% block content %}
+<div id="signup">
+<h2>Be The First To Use WonderHop</h2>
+
+<form method="POST">
+{% csrf_token %}
+<input type="email" name="email" id="email" placeholder="Email">
+<p id="error">{{ error }}</p>
+<input type="submit" value="Sign Up" />
+</form>
+</div>
+{% endblock %}

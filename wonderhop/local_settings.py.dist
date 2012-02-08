@@ -1,0 +1,6 @@
+# Some local settings could go here (if you copied it to local_settings.py)
+# Here are some things you might want to enable:
+
+LANDING_PAGE = True
+DEBUG = True
+TEMPLATE_DEBUG = True
