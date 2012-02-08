@@ -1,21 +1,26 @@
 import random
 import string
 import os.path
-import StringIO
 import re
-from itertools import ifilterfalse as _ifilterfalse
+import json
+import urllib2
+import base64
+from getpass import getpass
+from StringIO import StringIO
 from fabric.api import env, sudo, run, put, local, get
 from fabric.contrib.files import exists, upload_template, contains, append
 from fabric.contrib.project import rsync_project
 from fabric.context_managers import cd, settings, hide
 from fabric.contrib.console import confirm
-from fabric.operations import require
+from fabric.operations import require, prompt
 from fabric.utils import warn, abort
 
 def _dep(name): return os.path.join("dependencies", name)
 
 env.user = "wonderhop"
 env.key_filename = os.path.expanduser("~/.ssh/id_dsa")
+env.landing = True
+env.debug = True
 
 def dev():
     env.hosts = ["dev.wonderhop.com"]
@@ -27,69 +32,62 @@ def production():
     env.landing = True
     env.debug = True
 
-env.django_root = "/home/wonderhop"
-env.proj_root = env.django_root + "/wonderhop"
-env.django_static_root = "/usr/local/django-static"
+env.repo_root = "/home/wonderhop/wonderhop"
+env.proj_root = "/home/wonderhop/wonderhop/wonderhop"
+env.django_wsgi_root = "/home/wonderhop/wsgi"
+env.django_static_root = "/home/wonderhop/django-static"
 
-def deploy():
-    """Archive from source, upload to server, collect static, and reload"""
-    if local("hg st", capture=True).strip() != "":
-        msg = "Uncommitted changes present, and won't be pushed. Continue?"
-        if not confirm(msg, default=False):
-            abort("Aborted on request.")
+def clone_repo():
+    # Add known hosts for Github
+    append("~/.ssh/known_hosts", [
+        "|1|AxYrTZcwBIPIFSdy29CGanv85ZE=|D0Xa0QCz1anXJ9JrH4eJI3EORH8= ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==",
+        "|1|ErT4pRs4faesbyNw+WB0hWuIycs=|9+4iN3FDijMOl1Z+2PNB9O9wXjw= ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==",
+    ])
+    
+    if not exists("~/.ssh/id_github_deploy"):
+        # Generate a public/private key pair
+        run("ssh-keygen -q -t rsa -f ~/.ssh/id_github_deploy -N ''")
+        
+        ssh_pub_key = StringIO()
+        get("~/.ssh/id_github_deploy.pub", ssh_pub_key)
+        ssh_pub_key = ssh_pub_key.getvalue().strip()
+        
+        # Add it to Github
+        gh_user = prompt("Github username?")
+        gh_pass = getpass("Github password? ")
+        urllib2.urlopen(urllib2.Request("https://api.github.com/repos/wonderhop/wonderhop/keys", json.dumps({
+            "title": "wonderhop@{0}".format(env.host),
+            "key": ssh_pub_key,
+        }), {
+            "Content-Type": "application/json",
+            "Authorization": "Basic {0}".format(base64.b64encode("{0}:{1}".format(gh_user, gh_pass))),
+        }))
+        
+        # Specify that we should use the given key for Github
+        append("~/.ssh/config", "Host github.com\nIdentityFile ~/.ssh/id_github_deploy")
+    
+    run("git clone git@github.com:wonderhop/wonderhop.git")
 
-    for d in _ifilterfalse(exists, [env.django_root, env.django_static_root]):
-        sudo("mkdir -p {0} --mode=755".format(d))
-        sudo("chown wonderhop:wonderhop {0}".format(d))
-
-    if not exists(".pgpass"):
-        abort("Expected .pgpass not found.")
-
-    pgpass = StringIO.StringIO()
-    get(".pgpass", pgpass)
-    re_host = re.compile(r"^localhost:\*:wonderhop:wonderhop:(\w+)$")
-    pwds = filter(None, map(re_host.match, pgpass.getvalue().splitlines()))
-    if len(pwds) != 1:
-        abort("{0} .pgpass passwords, expected 1".format(len(pwds)))
-    passwd = pwds[0].group(1)
-
-    if os.path.exists("wonderhop.tgz"):
-        abort("wonderhop.tgz exists locally, remove it.")
-    for path in ["wonderhop.tgz", "wonderhop", env.proj_root + "-old"]:
-        if exists(path):
-            abort("{0} exists remotely, remove it.".format(path))
-
-    local("hg archive -t tgz -I wonderhop "
-          "-X wonderhop/local_settings.py.dist wonderhop.tgz")
-
-    put("wonderhop.tgz", "wonderhop.tgz")
-    local("rm wonderhop.tgz")
-    run("tar --strip-components=1 -zxvf wonderhop.tgz")
-    run("rm wonderhop.tgz")
-
-    run("mkdir wonderhop/apache")
+def copy_templates():
+    run("mkdir -p {0} --mode=755".format(env.django_static_root))
+    run("mkdir -p {0} --mode=755".format(env.django_wsgi_root))
 
     deps = {
-        "local_settings.py.template": ("wonderhop/local_settings.py", 0644, False),
+        "local_settings.py.template": (env.proj_root + "/local_settings.py", 0644, False),
         "apache.conf": ("/etc/apache2/sites-available/wonderhop", 0644, True),
-        "django.wsgi": ("wonderhop/apache/django.wsgi", 0644, False),
+        "django.wsgi": (env.django_wsgi_root + "/wonderhop.wsgi", 0644, False),
     }
-    env.database_password = "" # work around Fabric issue 316
-    with settings(database_password=passwd):
-        for src, (dst, mode, use_sudo) in deps.iteritems():
-            upload_template(_dep(src), dst, env, use_sudo=use_sudo)
-            sudo("chmod {0:o} {1}".format(mode, dst))
-            sudo("rm -rf {0}.bak".format(dst))
-
-    if exists(env.proj_root):
-        run("mv {0} {0}-old".format(env.proj_root))
-    run("mv wonderhop {0}".format(env.proj_root))
-    run("rm -rf {0}-old".format(env.proj_root))
-
-    with cd(env.proj_root):
-        run("./manage.py collectstatic --noinput")
+    for src, (dst, mode, use_sudo) in deps.iteritems():
+        upload_template(_dep(src), dst, env, use_sudo=use_sudo)
+        sudo("chmod {0:o} {1}".format(mode, dst))
+        sudo("rm -rf {0}.bak".format(dst))
 
     sudo("a2ensite wonderhop")
+
+def update_repo():
+    with cd(env.proj_root):
+        run("git pull")
+        run("./manage.py collectstatic --noinput")
     service("apache2", "reload")
 
 def syncdb():
@@ -104,6 +102,7 @@ def init_all():
     init_redis()
     init_postgres()
     init_apache()
+    init_git()
 
 def init_user():
     """Creates a user named wonderhop for access. Copies pubkey."""
@@ -133,8 +132,8 @@ def init_postgres():
 
     append("/etc/postgresql/9.1/main/pg_hba.conf", "local wonderhop wonderhop peer", use_sudo=True)
 
-    enable_service("postgresql-9.1")
-    service("postgresql-9.1", "restart") # In case it was running previously
+    enable_service("postgresql")
+    service("postgresql", "restart") # In case it was running previously
 
     create_db()
 
@@ -143,8 +142,13 @@ def init_apache():
     install_packages("apache2 libapache2-mod-wsgi")
     enable_service("apache2")
 
-    sudo("a2enmod wsgi") # Enable wsgi module
+    sudo("a2enmod wsgi")
+    sudo("a2dissite default")
     service("apache2", "restart")
+
+def init_git():
+    """Install git"""
+    install_packages("git")
 
 def install_packages(package_names):
     """Install packages by name (space separated)"""
@@ -170,9 +174,9 @@ def copy_sshkey():
         key = open(pubkey_filename, "r").read().strip()
         sshdir = "~wonderhop/.ssh"
         run("mkdir -p {0}".format(sshdir))
-        run("chmod 755 {0}".format(sshdir))
-        append("{0}/authorized_keys".format(sshdir), key, use_sudo=True)
-        run("chmod 644 {0}/authorized_keys".format(sshdir))
+        append("{0}/authorized_keys".format(sshdir), key)
+        run("chown -R wonderhop:wonderhop {0}".format(sshdir))
+        run("chmod -R o-rwx {0}".format(sshdir))
 
 def create_db():
     """Create skeletal postgres database"""
