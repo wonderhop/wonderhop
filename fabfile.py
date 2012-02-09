@@ -162,7 +162,7 @@ def init_postfix():
     
     append("/etc/postfix/virtual", "@wonderhop.com marklurie@gmail.com", use_sudo=True)
     sudo("postmap /etc/postfix/virtual")
-    append("/etc/postfix/main.cf", "virtual_alias_maps = hash:/etc/postfix/virtual")
+    append("/etc/postfix/main.cf", "virtual_alias_maps = hash:/etc/postfix/virtual", use_sudo=True)
     service("postfix", "reload")
 
 def init_git():
@@ -171,7 +171,7 @@ def init_git():
 
 def install_packages(package_names):
     """Install packages by name (space separated)"""
-    sudo("apt-get install -y {0}".format(package_names))
+    sudo("DEBIAN_FRONTEND=noninteractive apt-get install -q -y {0}".format(package_names))
 
 def enable_service(service_name):
     """Enable a system service using update-rc.d"""
