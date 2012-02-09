@@ -38,6 +38,7 @@ env.django_wsgi_root = "/home/wonderhop/wsgi"
 env.django_static_root = "/home/wonderhop/django-static"
 
 def clone_repo():
+    """Clone the wonderhop repo on the server"""
     # Add known hosts for Github
     append("~/.ssh/known_hosts", [
         "|1|AxYrTZcwBIPIFSdy29CGanv85ZE=|D0Xa0QCz1anXJ9JrH4eJI3EORH8= ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==",
@@ -68,7 +69,8 @@ def clone_repo():
     
     run("git clone git@github.com:wonderhop/wonderhop.git")
 
-def copy_templates():
+def copy_config_files():
+    """Copies the configuration files (requires cloned repo)"""
     run("mkdir -p {0} --mode=755".format(env.django_static_root))
     run("mkdir -p {0} --mode=755".format(env.django_wsgi_root))
 
@@ -85,24 +87,30 @@ def copy_templates():
     sudo("a2ensite wonderhop")
 
 def update_repo():
+    """Pull the git repo and reload apache"""
     with cd(env.proj_root):
         run("git pull")
+        run("./manage.py syncdb --noinput")
+        run("./manage.py migrate --noinput")
         run("./manage.py collectstatic --noinput")
     service("apache2", "reload")
 
-def syncdb():
-    """Run Django syncdb remotely"""
+def manage(command):
+    """Issue a command to manage.py"""
     with cd(env.proj_root):
-        run("./manage.py syncdb --noinput")
+        run("./manage.py {0}".format(command))
 
 def init_all():
-    """Call all the init tasks. Use on a fresh Ubuntu instance."""
+    """Call all the init tasks, then set up the site. Use on a fresh Ubuntu instance."""
     init_user()
     init_python()
     init_redis()
     init_postgres()
     init_apache()
     init_git()
+    clone_repo()
+    copy_config_files()
+    update_repo()
 
 def init_user():
     """Creates a user named wonderhop for access. Copies pubkey."""

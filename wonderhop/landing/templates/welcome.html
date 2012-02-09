@@ -1,0 +1,8 @@
+{% extends "landing.html" %}
+{% block content %}
+<div id="signup">
+<h2>Thanks!</h2>
+<p id="welcome">We'll keep you updated on our progress {{ signup.email }}... look forward to more soon!</p>
+<p>Here's your referral link: <input type="text" size="50" autofocus value="{{ referral_url }}"></p>
+</div>
+{% endblock %}
