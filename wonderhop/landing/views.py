@@ -50,5 +50,14 @@ def welcome(request, signup_id):
         "referral_url": request.build_absolute_uri(reverse(refer, args=[signup.referral_key])),
     })
 
+def about(request):
+    return render(request, "coming_soon.html")
+
+def privacy(request):
+    return render(request, "coming_soon.html")
+
+def jobs(request):
+    return render(request, "coming_soon.html")
+
 def refer(request, referral_key):
     return redirect(home)

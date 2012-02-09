@@ -9,5 +9,24 @@
 </head>
 <body id="{% block bodyid %}{% endblock %}">
 {% block content %}{% endblock %}
+
+<!--Footer Begin-->
+<div id="footer">
+    <div class="footer-box">
+   <!-- Left Side footer-->
+        <div class="foot-nav">
+        <a href="{% url wonderhop.landing.views.about %}">ABOUT</a>
+        <a href="{% url wonderhop.landing.views.privacy %}">PRIVACY</a>
+        <a href="mailto:contact@wonderhop.com">CONTACT</a>
+        <a href="http://wonderhop.tumblr.com/">BLOG</a>
+        <a href="{% url wonderhop.landing.views.jobs %}">JOBS</a>
+        <a href="mailto:contact@wonderhop.com">FEEDBACK</a>
+        </div>
+   <!--Right Side footer-->
+        <h6><a href="{% url wonderhop.landing.views.home %}">WonderHop © 2012</a></h6>
+    <div class="clear"></div>
+    </div>
+</div>
+<!--Footer End-->
 </body>
 </html>

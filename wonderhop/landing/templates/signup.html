@@ -29,7 +29,7 @@ $(window).load(function() {
                 <h5>Sign me up!</h5>
                 <form method="POST">
                 {% csrf_token %}
-                <a href="javascript:void(0);" class="link-blue">LOGIN</a>
+                <!-- <a href="javascript:void(0);" class="link-blue">LOGIN</a> -->
                 <input name="email" type="email" autofocus class="inp-fld" placeholder="Email address" />
                 <p id="error">{{ error }}</p>
                 <input type="submit" value="Apply for membership" class="btn-pink" />
@@ -41,23 +41,5 @@ $(window).load(function() {
         <div class="clear"></div>
     </div>
 <!--Welcome End-->
-<!--Footer Begin-->
-<div id="footer">
-    <div class="footer-box">
-   <!-- Left Side footer-->
-        <div class="foot-nav">
-        <a href="javascript:void(0);">ABOUT</a>
-        <a href="javascript:void(0);">PRIVACY</a>
-        <a href="javascript:void(0);">CONTACT</a>
-        <a href="javascript:void(0);">BLOG</a>
-        <a href="javascript:void(0);">JOBS</a>
-        <a href="javascript:void(0);">FEEDBACK</a>
-        </div>
-   <!--Right Side footer-->
-        <h6><a href="javascript:void(0);">WonderHop © 2012</a></h6>
-    <div class="clear"></div>
-    </div>
-</div>
-<!--Footer End-->
 </div>
 {% endblock %}
