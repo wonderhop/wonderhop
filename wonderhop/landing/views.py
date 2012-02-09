@@ -3,10 +3,12 @@ from django.shortcuts import (
     redirect,
     get_object_or_404,
 )
+from django.http import HttpResponseRedirect
 from django.db import IntegrityError
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.core.mail import send_mail
+from django.views.decorators.http import require_POST
 from wonderhop.landing.models import Signup
 import random
 import string
@@ -56,7 +58,7 @@ You can always find out how many people you have referred by coming back to http
 
 Thank you!
 Team WonderHop""".format(url=_referral_url(request, signup)),
-"WonderHop <contact@wonderhop.com>", [signup.email], fail_silently=False,
+                    "WonderHop <contact@wonderhop.com>", [signup.email], fail_silently=True,
                 )
             return redirect(welcome, signup.id)
         except ValidationError as v:
@@ -76,7 +78,22 @@ def welcome(request, signup_id):
             "text": REFERRAL_LINK_TEXT,
         })),
         "facebook_link_caption": REFERRAL_LINK_TEXT,
+        "emailed": "emailed" in request.GET,
     })
+
+@require_POST
+def share_email(request, signup_id):
+    signup = get_object_or_404(Signup, id=signup_id)
+    emails = [x.strip() for x in request.POST["emails"].split(",")]
+    send_mail(
+        "You've been invited to join WonderHop!",
+        """One of your friends has invited you to join WonderHop, where you get up to 60% off unique decor, kitchen treats, and family finds to make life one-of-a-kind.
+
+Just use this link to sign up and give credit to the person who invited you:
+{url}""".format(url=_referral_url(request, signup)),
+        "WonderHop <contact@wonderhop.com>", emails, fail_silently=False,
+    )
+    return HttpResponseRedirect("{0}?{1}".format(reverse(welcome, args=[signup.id]), urlencode({"emailed": "true"})))
 
 def about(request):
     return render(request, "coming_soon.html")

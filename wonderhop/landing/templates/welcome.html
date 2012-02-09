@@ -65,6 +65,9 @@ $(function(){
     <!--Material Container Begin-->
     <div id="container">
         <!-- <div class="full-width"><span class="link-blue b10">– 21 DAYS UNTIL WONDERHOP LAUNCH –</span></div> -->
+        {% if emailed %}
+        <div class="full-width">Your emails have been sent!</div>
+        {% endif %}
         <div class="main-heading"><h1>Invite Friends, Earn Cash</h1></div>
         <div class="form-panel-box">
             <!--Left panel start-->
@@ -96,8 +99,11 @@ $(function(){
                 <span class="or-snet">– or –</span>-->
                 <p>Just enter your friends' email addresses!</p>
                 <div class="share-search">
-                    <input name="" type="text" placeholder="Type emails, separated by commas" class="inp-fld send" />
-                    <input name="" type="button" class="btn-pink" value="Send" />
+                    <form method="POST" action="{% url wonderhop.landing.views.share_email signup.id %}">
+                        {% csrf_token %}
+                        <input name="emails" type="text" placeholder="Type emails, separated by commas" class="inp-fld send" />
+                        <input type="submit" class="btn-pink" value="Send" />
+                    </form>
                 </div>
             </div>
             <!--Right panel End-->
