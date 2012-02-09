@@ -9,6 +9,7 @@ from django.core.urlresolvers import reverse
 from wonderhop.landing.models import Signup
 import random
 import string
+from urllib import urlencode
 
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return "".join(random.choice(chars) for x in range(size))
@@ -47,9 +48,15 @@ def home(request):
 
 def welcome(request, signup_id):
     signup = get_object_or_404(Signup, id=signup_id)
+    referral_url = request.build_absolute_uri(reverse(refer, args=[signup.referral_key]))
+    
     return render(request, "welcome.html", {
         "signup": signup,
-        "referral_url": request.build_absolute_uri(reverse(refer, args=[signup.referral_key])),
+        "referral_url": referral_url,
+        "tweet_url": "https://twitter.com/share?{0}".format(urlencode({
+            "url": referral_url,
+            "text": "Join me on WonderHop to save up to 60% on wonderful finds for an inspired home!",
+        }))
     })
 
 def about(request):
