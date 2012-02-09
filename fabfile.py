@@ -107,6 +107,7 @@ def init_all():
     init_redis()
     init_postgres()
     init_apache()
+    init_postfix()
     init_git()
     clone_repo()
     copy_config_files()
@@ -153,6 +154,16 @@ def init_apache():
     sudo("a2enmod wsgi")
     sudo("a2dissite default")
     service("apache2", "restart")
+
+def init_postfix():
+    """Install postfix, make it forward to Mark Lurie"""
+    install_packages("postfix")
+    enable_service("postfix")
+    
+    append("/etc/postfix/virtual", "@wonderhop.com marklurie@gmail.com", use_sudo=True)
+    sudo("postmap /etc/postfix/virtual")
+    append("/etc/postfix/main.cf", "virtual_alias_maps = hash:/etc/postfix/virtual")
+    service("postfix", "reload")
 
 def init_git():
     """Install git"""
