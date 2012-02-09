@@ -55,7 +55,7 @@ def welcome(request, signup_id):
         "referral_url": referral_url,
         "tweet_url": "https://twitter.com/share?{0}".format(urlencode({
             "url": referral_url,
-            "text": "Join me on WonderHop to save up to 60% on wonderful finds for an inspired home!",
+            "text": "Join me on WonderHop for up to 60% off unique decor, kitchen discoveries, and family finds to make your life one-of-a-kind.",
         }))
     })
 

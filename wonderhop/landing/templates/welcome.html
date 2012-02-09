@@ -1,4 +1,23 @@
 {% extends "landing.html" %}
+{% block extrahead %}
+<script>
+$(function(){
+    $(".lnk-t").click(function(e){
+        var width  = 575,
+        height = 220,
+        left   = ($(window).width()  - width)  / 2,
+        top    = ($(window).height() - height) / 2,
+        opts   = 'status=1' +
+                 ',width='  + width  +
+                 ',height=' + height +
+                 ',top='    + top    +
+                 ',left='   + left;
+        window.open($(this).attr("href"), "tweet", opts);
+        e.preventDefault();
+    });
+});
+</script>
+{% endblock %}
 {% block content %}
 <!--Header Begin-->
 <div id="wrapper">
@@ -44,7 +63,7 @@
                     <input autofocus type="text" value="{{ referral_url }}" class="inp-fld" />
                     <div class="s-left">
                         <h3>SHARE</h3>
-                        <a href="{{ tweet_url }}" target="_blank" class="lnk-t"></a>
+                        <a href="{{ tweet_url }}" class="lnk-t"></a>
                         <a href="javascript:void(0);" class="lnk-f"></a>
                     </div>
                 </div>
