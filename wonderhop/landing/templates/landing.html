@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>WonderHop</title>
+<title>{% block title %}WonderHop{% endblock %}</title>
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}landing/stylesheets/style.css"/>
+<script src="{{ STATIC_URL }}landing/js/jquery-1.6.1.min.js" ></script>
+<script src="{{ STATIC_URL }}landing/js/common.js" ></script>
+{% block extrahead %}{% endblock %}
 </head>
-<body>
-<h1>WonderHop</h1>
+<body id="{% block bodyid %}{% endblock %}">
 {% block content %}{% endblock %}
-<a href="mailto:wonderhop@gmail.com">wonderhop@gmail.com</a>
 </body>
 </html>

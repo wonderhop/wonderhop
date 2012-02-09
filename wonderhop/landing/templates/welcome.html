@@ -1,8 +1,104 @@
 {% extends "landing.html" %}
 {% block content %}
-<div id="signup">
-<h2>Thanks!</h2>
-<p id="welcome">We'll keep you updated on our progress {{ signup.email }}... look forward to more soon!</p>
-<p>Here's your referral link: <input type="text" size="50" autofocus value="{{ referral_url }}"></p>
+<!--Header Begin-->
+<div id="wrapper">
+    <!--Header Begin-->
+    <div id="header">
+        <a href="javascript:void(0);" class="wonder"><img src="{{ STATIC_URL }}landing/img/wonder-hop.png" alt="" /></a>
+        <a href="javascript:void(0);" class="m-id">{{ signup.email }}</a>
+    </div>
+    <!--Header End-->
+
+    <!--Main Navigation Begin-->
+    <div id="main-nav">
+        <div class="mnav">
+            <!--Left Side main Navigation Begin-->
+            <div class="left-mnav">
+                <a href="javascript:void(0);">SALES</a>
+                <a href="javascript:void(0);">PROJECTS</a>
+                <a href="javascript:void(0);">FAVORITES</a>
+            </div>
+            <!--Left Side main Navigation End-->
+            <!--Right Side main Navigation Start-->
+            <ul class="right-mnav">
+                <li><a href="javascript:void(0);">about</a></li>
+                <li><a href="javascript:void(0);">contact</a></li>
+                <li><a href="javascript:void(0);">blog</a></li>
+                <li><a href="javascript:void(0);">job</a></li>
+                <li><a href="javascript:void(0);">feedback</a></li>
+            </ul>
+            <!--Right Side main Navigation End-->
+        </div>
+    </div>
+    <!--Main Navigation Begin-->
+
+    <!--Material Container Begin-->
+    <div id="container">
+        <div class="full-width"><a href="javascript:void(0);" class="link-blue b10">– 21 DAYS UNTIL WONDERHOP LAUNCH –</a></div>
+        <div class="main-heading"><h1>Invite Friends, Earn Cash</h1></div>
+        <div class="form-panel-box">
+            <!--Left panel start-->
+            <div class="form-panel left">
+                <h4>1</h4>
+                <h5>Share your personal link</h5>
+                <p>Copy and paste the link below to twitter or facebook</p>
+                <div class="share-search">
+                    <input name="" type="text" value="{{ referral_url }}" class="inp-fld" />
+                    <div class="s-left">
+                        <h3>SHARE</h3>
+                        <a href="javascript:void(0);" class="lnk-t"></a>
+                        <a href="javascript:void(0);" class="lnk-f"></a>
+                    </div>
+                </div>
+            </div>
+            <!--Left panel End-->
+            <!--Right panel start-->
+            <div class="form-panel">
+                <h4>2</h4>
+                <h5>Invite friends by email</h5>
+                <p>Let’s find your friends! Which email service do you use?</p>
+                <div class="btn-snet">
+                    <a href="javascript:void(0);">Gmail</a>
+                    <a href="javascript:void(0);">Hotmail</a>
+                    <a href="javascript:void(0);">Yahoo</a>
+                    <a href="javascript:void(0);">AOL</a>
+                </div>
+                <span class="or-snet">– or –</span>
+                <div class="share-search">
+                    <input name="" type="text" value="Type emails, separated by commas" class="inp-fld send" onfocus="clearText(this);" onblur="clearText(this);" />
+                    <input name="" type="button" class="btn-pink" value="Send" />
+                </div>
+            </div>
+            <!--Right panel End-->
+
+        </div>
+
+    </div>
+    <!--Material Container End-->
+
+    <div class="clear"></div>
 </div>
+<!--Header End-->
+
+
+<!--Footer Begin-->
+<div id="footer">
+    <div class="footer-box">
+        <!--Footer left side navigation begin-->
+        <div class="foot-nav">
+        <a href="javascript:void(0);">ABOUT</a>
+        <a href="javascript:void(0);">PRIVACY</a>
+        <a href="javascript:void(0);">CONTACT</a>
+        <a href="javascript:void(0);">BLOG</a>
+        <a href="javascript:void(0);">JOBS</a>
+        <a href="javascript:void(0);">FEEDBACK</a>
+        </div>
+        <!--Footer left side navigation End-->
+        <!--Footer Right side Copyright begin-->
+        <h6><a href="javascript:void(0);">WonderHop © 2012</a></h6>
+        <!--Footer Right side Copyright End-->
+    <div class="clear"></div>
+    </div>
+</div>
+<!--Footer End-->
 {% endblock %}
