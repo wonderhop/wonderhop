@@ -86,7 +86,7 @@ def copy_config_files():
 
     sudo("a2ensite wonderhop")
 
-def update_repo():
+def update():
     """Pull the git repo and reload apache"""
     with cd(env.proj_root):
         run("git pull")
@@ -111,7 +111,7 @@ def init_all():
     init_git()
     clone_repo()
     copy_config_files()
-    update_repo()
+    update()
 
 def init_user():
     """Creates a user named wonderhop for access. Copies pubkey."""
