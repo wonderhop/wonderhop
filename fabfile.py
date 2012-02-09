@@ -28,7 +28,7 @@ def dev():
     env.debug = True
 
 def production():
-    env.hosts = ["wonderhop.com"]
+    env.hosts = ["live.wonderhop.com"]
     env.landing = True
     env.debug = True
 
