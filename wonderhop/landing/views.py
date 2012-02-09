@@ -23,11 +23,12 @@ def home(request):
             try:
                 signup = Signup.objects.get(email=email)
             except Signup.DoesNotExist:
-                signup = Signup(email=email)
+                signup = Signup(email=email, referring_user=None)
                 try:
                     signup.clean_fields(exclude=["referral_key"])
                 except ValidationError as v:
-                    context["error"] = "Invalid email address"
+                    #context["error"] = "Invalid email address"
+                    raise
                 else:
                     MAX_ATTEMPTS = 5
                     for attempt in xrange(MAX_ATTEMPTS):
