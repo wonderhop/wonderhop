@@ -6,13 +6,17 @@ from django.shortcuts import (
 from django.db import IntegrityError
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
+from django.core.mail import send_mail
 from wonderhop.landing.models import Signup
 import random
 import string
 from urllib import urlencode
 
-def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+def _id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return "".join(random.choice(chars) for x in range(size))
+
+def _referral_url(request, signup):
+    return request.build_absolute_uri(reverse(refer, args=[signup.referral_key]))
 
 def home(request):
     context = {}
@@ -33,13 +37,27 @@ def home(request):
                 MAX_ATTEMPTS = 5
                 for attempt in xrange(MAX_ATTEMPTS):
                     try:
-                        signup.referral_key = id_generator()
+                        signup.referral_key = _id_generator()
                         signup.save()
                     except IntegrityError:
                         if attempt == MAX_ATTEMPTS - 1:
                             raise
                     else:
                         break
+                # TODO this should be a signal on Signup
+                send_mail(
+                    "Thank you for signing up for WonderHop!",
+                    """Thank you for signing up for WonderHop!
+                    
+                    As you know, membership is free but limited. If you'd like to be one of the first people given access, all you have to do is share WonderHop with friends by e-mailing/tweeting/Facebooking this custom URL:
+                    {url}
+                    
+                    You can always find out how many people you have referred by coming back to http://wonderhop.com/ and entering your email address again.
+                    
+                    Thank you!
+                    Team WonderHop""".format(url=_referral_url(request, signup)),
+                    "contact@wonderhop.com", [signup.email], fail_silently=False,
+                )
             return redirect(welcome, signup.id)
         except ValidationError as v:
             context["error"] = "Invalid email address"
@@ -48,14 +66,13 @@ def home(request):
 
 def welcome(request, signup_id):
     signup = get_object_or_404(Signup, id=signup_id)
-    referral_url = request.build_absolute_uri(reverse(refer, args=[signup.referral_key]))
     REFERRAL_LINK_TEXT = "Join me on WonderHop for up to 60% off unique decor, kitchen treats, and family finds to make life one-of-a-kind."
     
     return render(request, "welcome.html", {
         "signup": signup,
-        "referral_url": referral_url,
+        "referral_url": _referral_url(request, signup),
         "tweet_url": "https://twitter.com/share?{0}".format(urlencode({
-            "url": referral_url,
+            "url": _referral_url(request, signup),
             "text": REFERRAL_LINK_TEXT,
         })),
         "facebook_link_caption": REFERRAL_LINK_TEXT,
