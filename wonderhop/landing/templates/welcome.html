@@ -4,7 +4,7 @@
 <div id="wrapper">
     <!--Header Begin-->
     <div id="header">
-        <a href="javascript:void(0);" class="wonder"><img src="{{ STATIC_URL }}landing/img/wonder-hop.png" alt="" /></a>
+        <a href="{% url wonderhop.landing.views.home %}" class="wonder"><img src="{{ STATIC_URL }}landing/img/wonder-hop.png" alt="" /></a>
         <a href="javascript:void(0);" class="m-id">{{ signup.email }}</a>
     </div>
     <!--Header End-->
@@ -34,7 +34,7 @@
 
     <!--Material Container Begin-->
     <div id="container">
-        <div class="full-width"><a href="javascript:void(0);" class="link-blue b10">– 21 DAYS UNTIL WONDERHOP LAUNCH –</a></div>
+        <div class="full-width"><span class="link-blue b10">– 21 DAYS UNTIL WONDERHOP LAUNCH –</span></div>
         <div class="main-heading"><h1>Invite Friends, Earn Cash</h1></div>
         <div class="form-panel-box">
             <!--Left panel start-->
@@ -43,7 +43,7 @@
                 <h5>Share your personal link</h5>
                 <p>Copy and paste the link below to twitter or facebook</p>
                 <div class="share-search">
-                    <input name="" type="text" value="{{ referral_url }}" class="inp-fld" />
+                    <input autofocus type="text" value="{{ referral_url }}" class="inp-fld" />
                     <div class="s-left">
                         <h3>SHARE</h3>
                         <a href="javascript:void(0);" class="lnk-t"></a>
@@ -65,7 +65,7 @@
                 </div>
                 <span class="or-snet">– or –</span>
                 <div class="share-search">
-                    <input name="" type="text" value="Type emails, separated by commas" class="inp-fld send" onfocus="clearText(this);" onblur="clearText(this);" />
+                    <input name="" type="text" placeholder="Type emails, separated by commas" class="inp-fld send" />
                     <input name="" type="button" class="btn-pink" value="Send" />
                 </div>
             </div>
