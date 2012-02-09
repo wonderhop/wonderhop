@@ -48,15 +48,15 @@ def home(request):
                 send_mail(
                     "Thank you for signing up for WonderHop!",
                     """Thank you for signing up for WonderHop!
-                    
-                    As you know, membership is free but limited. If you'd like to be one of the first people given access, all you have to do is share WonderHop with friends by e-mailing/tweeting/Facebooking this custom URL:
-                    {url}
-                    
-                    You can always find out how many people you have referred by coming back to http://wonderhop.com/ and entering your email address again.
-                    
-                    Thank you!
-                    Team WonderHop""".format(url=_referral_url(request, signup)),
-                    "contact@wonderhop.com", [signup.email], fail_silently=False,
+
+As you know, membership is free but limited. If you'd like to be one of the first people given access, all you have to do is share WonderHop with friends by e-mailing/tweeting/Facebooking this custom URL:
+{url}
+
+You can always find out how many people you have referred by coming back to http://wonderhop.com/ and entering your email address again.
+
+Thank you!
+Team WonderHop""".format(url=_referral_url(request, signup)),
+"WonderHop <contact@wonderhop.com>", [signup.email], fail_silently=False,
                 )
             return redirect(welcome, signup.id)
         except ValidationError as v:
