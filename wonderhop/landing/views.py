@@ -49,14 +49,16 @@ def home(request):
 def welcome(request, signup_id):
     signup = get_object_or_404(Signup, id=signup_id)
     referral_url = request.build_absolute_uri(reverse(refer, args=[signup.referral_key]))
+    REFERRAL_LINK_TEXT = "Join me on WonderHop for up to 60% off unique decor, kitchen treats, and family finds to make life one-of-a-kind."
     
     return render(request, "welcome.html", {
         "signup": signup,
         "referral_url": referral_url,
         "tweet_url": "https://twitter.com/share?{0}".format(urlencode({
             "url": referral_url,
-            "text": "Join me on WonderHop for up to 60% off unique decor, kitchen discoveries, and family finds to make your life one-of-a-kind.",
-        }))
+            "text": REFERRAL_LINK_TEXT,
+        })),
+        "facebook_link_caption": REFERRAL_LINK_TEXT,
     })
 
 def about(request):
