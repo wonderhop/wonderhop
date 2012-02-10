@@ -8,7 +8,7 @@ import base64
 from getpass import getpass
 from StringIO import StringIO
 from fabric.api import env, sudo, run, put, local, get
-from fabric.contrib.files import exists, upload_template, contains, append
+from fabric.contrib.files import exists, upload_template, contains, append, comment
 from fabric.contrib.project import rsync_project
 from fabric.context_managers import cd, settings, hide
 from fabric.contrib.console import confirm
@@ -162,7 +162,9 @@ def init_postfix():
     
     append("/etc/postfix/virtual", "@wonderhop.com marklurie@gmail.com", use_sudo=True)
     sudo("postmap /etc/postfix/virtual")
+    comment("/etc/postfix/main.cf", "^mydestination")
     append("/etc/postfix/main.cf", "virtual_alias_maps = hash:/etc/postfix/virtual", use_sudo=True)
+    append("/etc/postfix/main.cf", "mydestination = wonderhop.com, localhost")
     service("postfix", "reload")
 
 def init_git():
