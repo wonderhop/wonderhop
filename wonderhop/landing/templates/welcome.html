@@ -122,9 +122,8 @@ $(function(){
 var csPageOptions = {
     domain_key:"EAHNM54P828ZFP8YWFW6", 
     afterSubmitContacts: function(contacts){
-        var contact_emails = [];
-        $.each(contacts, function(idx, contact){
-            contact_emails.push(contact.primaryEmail());
+        var contact_emails = $.map(contacts, function(contact){
+            return contact.primaryEmail();
         });
         $("#hidden_email_form").find("input[name=emails]").val(contact_emails.join(",")).end().submit();
     }
