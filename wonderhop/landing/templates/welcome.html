@@ -89,20 +89,21 @@ $(function(){
             <div class="form-panel">
                 <h4>2</h4>
                 <h5>Invite friends by email</h5>
-                <p>Let’s find your friends! Which email service do you use?</p>
+                <p>Let’s find your friends!</p>
                 <div class="btn-snet">
-                    <a class="cs_import" href="javascript:void(0);">Gmail</a>
-                    <a class="cs_import" href="javascript:void(0);">Hotmail</a>
-                    <a class="cs_import" href="javascript:void(0);">Yahoo</a>
-                    <a class="cs_import" href="javascript:void(0);">AOL</a>
+                    <a class="cs_import" href="javascript:void(0);">Import from Address Book</a>
                 </div>
+                <!-- A hidden form for contact importer -->
+                <form method="POST" id="hidden_email_form" action="{% url wonderhop.landing.views.share_email signup.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="emails">
+                </form>
                 <span class="or-snet">&ndash; or &ndash;</span>
-                <p>Just enter your friends' email addresses!</p>
                 <div class="share-search">
                     <form method="POST" action="{% url wonderhop.landing.views.share_email signup.id %}">
                         {% csrf_token %}
-                        <input id="emails" name="emails" type="text" placeholder="Type emails, separated by commas" class="inp-fld send" />
-                        <input type="submit" class="btn-pink" value="Send" />
+                        <input name="emails" type="text" placeholder="Type emails, separated by commas" class="inp-fld send">
+                        <input type="submit" class="btn-pink" value="Send">
                     </form>
                 </div>
             </div>
@@ -119,8 +120,14 @@ $(function(){
 <script type="text/javascript" src="https://api.cloudsponge.com/address_books.js"></script>
 <script type="text/javascript" charset="utf-8">
 var csPageOptions = {
-  domain_key:"EAHNM54P828ZFP8YWFW6", 
-  textarea_id:"emails"
+    domain_key:"EAHNM54P828ZFP8YWFW6", 
+    afterSubmitContacts: function(contacts){
+        var contact_emails = [];
+        $.each(contacts, function(idx, contact){
+            contact_emails.push(contact.primaryEmail());
+        });
+        $("#hidden_email_form").find("input[name=emails]").val(contact_emails.join(",")).end().submit();
+    }
 };
 </script>
 
