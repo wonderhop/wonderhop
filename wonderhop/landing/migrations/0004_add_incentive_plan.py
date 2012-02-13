@@ -12,6 +12,7 @@ class Migration(SchemaMigration):
         db.create_table('landing_incentiveplan', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('invitee_incentive', self.gf('django.db.models.fields.DecimalField')(max_digits=6, decimal_places=2)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=64)),
         ))
         db.send_create_signal('landing', ['IncentivePlan'])
 
@@ -24,8 +25,9 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal('landing', ['IncentivePlanRewardTier'])
 
-        from django.core.management import call_command
-        call_command("loaddata", "initial_incentive_plans.json")
+        # Adding field 'Signup.incentive_plan'
+        db.add_column('landing_signup', 'incentive_plan', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['landing.IncentivePlan'], null=True, blank=True), keep_default=False)
+
 
     def backwards(self, orm):
         
@@ -35,12 +37,16 @@ class Migration(SchemaMigration):
         # Deleting model 'IncentivePlanRewardTier'
         db.delete_table('landing_incentiveplanrewardtier')
 
+        # Deleting field 'Signup.incentive_plan'
+        db.delete_column('landing_signup', 'incentive_plan_id')
+
 
     models = {
         'landing.incentiveplan': {
             'Meta': {'object_name': 'IncentivePlan'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'invitee_incentive': ('django.db.models.fields.DecimalField', [], {'max_digits': '6', 'decimal_places': '2'})
+            'invitee_incentive': ('django.db.models.fields.DecimalField', [], {'max_digits': '6', 'decimal_places': '2'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '64'})
         },
         'landing.incentiveplanrewardtier': {
             'Meta': {'object_name': 'IncentivePlanRewardTier'},
@@ -53,6 +59,7 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Signup'},
             'email': ('django.db.models.fields.EmailField', [], {'unique': 'True', 'max_length': '75'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'incentive_plan': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['landing.IncentivePlan']", 'null': 'True', 'blank': 'True'}),
             'referral_key': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '16'}),
             'referring_user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['landing.Signup']", 'null': 'True', 'blank': 'True'}),
             'sign_up_date': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'})
