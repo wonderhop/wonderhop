@@ -47,6 +47,9 @@ class Invite(models.Model):
     recipient = models.EmailField()
     sent_date = models.DateTimeField(auto_now_add=True)
 
+    def __unicode__(self):
+        return self.recipient
+
 class SingletonManager(models.Manager):
     def singleton_instance(self):
         return self.get_or_create(id=0)[0]
