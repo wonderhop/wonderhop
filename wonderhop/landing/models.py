@@ -45,7 +45,7 @@ class SingletonManager(models.Manager):
         return self.get_or_create(id=0)[0]
 
 class LandingSettings(models.Model):
-    id = models.IntegerField(primary_key=True, choices=((0, "Default"),))
+    id = models.IntegerField(primary_key=True, choices=((0, "Default"),), default=0)
     default_incentive_plan = models.ForeignKey(IncentivePlan, null=True, blank=True)
 
     objects = SingletonManager()
