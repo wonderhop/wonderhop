@@ -42,6 +42,11 @@ class Signup(models.Model):
         
         return invited_rewards + invitee_incentive
 
+class Invite(models.Model):
+    sender = models.ForeignKey(Signup)
+    recipient = models.EmailField()
+    sent_date = models.DateTimeField(auto_now_add=True)
+
 class SingletonManager(models.Manager):
     def singleton_instance(self):
         return self.get_or_create(id=0)[0]

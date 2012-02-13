@@ -13,7 +13,10 @@ from django.core.mail import (
     get_connection,
 )
 from django.views.decorators.http import require_POST
-from wonderhop.landing.models import Signup
+from wonderhop.landing.models import (
+    Signup,
+    Invite,
+)
 import random
 import string
 from urllib import urlencode
@@ -100,7 +103,18 @@ Just use this link to sign up and give credit to the person who invited you:
                 to=[to_addr],
             )
     
-    get_connection().send_messages([invite_email(x.strip()) for x in request.POST["emails"].split(",")])
+    messages = []
+    for x in request.POST["emails"].split(","):
+        addr = x.strip().lower()
+        try:
+            Invite(sender=signup, recipient=addr).save()
+        except (ValidationError, IntegrityError):
+            continue
+        messages.append(invite_email(addr))
+    
+    connection = get_connection()
+    connection.send_messages(messages)
+    connection.close()
     return HttpResponseRedirect("{0}?{1}".format(reverse(welcome, args=[signup.id]), urlencode({"emailed": "true"})))
 
 def about(request):
