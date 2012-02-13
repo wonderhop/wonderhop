@@ -43,7 +43,7 @@ class Signup(models.Model):
         return invited_rewards + invitee_incentive
 
 class Invite(models.Model):
-    sender = models.ForeignKey(Signup)
+    sender = models.ForeignKey(Signup, related_name="sent_invites_set")
     recipient = models.EmailField()
     sent_date = models.DateTimeField(auto_now_add=True)
 
