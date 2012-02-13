@@ -28,17 +28,19 @@ class Signup(models.Model):
 
     def reward_balance(self):
         """Returns the user's current reward balance as a decimal.Decimal."""
-        if self.incentive_plan is None: return Decimal(0)
-        
         referring_user_plan = None if self.referring_user is None else self.referring_user.incentive_plan
-        invitee_incentive = 0 if referring_user_plan is None else referring_user_plan.invitee_incentive
+        invitee_incentive = Decimal(0) if referring_user_plan is None else referring_user_plan.invitee_incentive
         
-        num_referred_users = self.referred_user_set.count()
-        return self.incentive_plan.reward_tiers.filter(
-            num_signups__lte=num_referred_users
-        ).aggregate(
-            reward_balance=models.Sum("reward")
-        )["reward_balance"] + invitee_incentive
+        if self.incentive_plan is not None:
+            invited_rewards = self.incentive_plan.reward_tiers.filter(
+                num_signups__lte=self.referred_user_set.count()
+            ).aggregate(
+                reward_balance=models.Sum("reward")
+            )["reward_balance"] or Decimal(0) # Can return NULL if no rows
+        else:
+            invited_rewards = Decimal(0)
+        
+        return invited_rewards + invitee_incentive
 
 class SingletonManager(models.Manager):
     def singleton_instance(self):
