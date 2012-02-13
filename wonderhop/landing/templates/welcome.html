@@ -89,19 +89,19 @@ $(function(){
             <div class="form-panel">
                 <h4>2</h4>
                 <h5>Invite friends by email</h5>
-                <!--<p>Let’s find your friends! Which email service do you use?</p>
+                <p>Let’s find your friends! Which email service do you use?</p>
                 <div class="btn-snet">
-                    <a href="javascript:void(0);">Gmail</a>
-                    <a href="javascript:void(0);">Hotmail</a>
-                    <a href="javascript:void(0);">Yahoo</a>
-                    <a href="javascript:void(0);">AOL</a>
+                    <a class="cs_import" href="javascript:void(0);">Gmail</a>
+                    <a class="cs_import" href="javascript:void(0);">Hotmail</a>
+                    <a class="cs_import" href="javascript:void(0);">Yahoo</a>
+                    <a class="cs_import" href="javascript:void(0);">AOL</a>
                 </div>
-                <span class="or-snet">– or –</span>-->
+                <span class="or-snet">&ndash; or &ndash;</span>
                 <p>Just enter your friends' email addresses!</p>
                 <div class="share-search">
                     <form method="POST" action="{% url wonderhop.landing.views.share_email signup.id %}">
                         {% csrf_token %}
-                        <input name="emails" type="text" placeholder="Type emails, separated by commas" class="inp-fld send" />
+                        <input id="emails" name="emails" type="text" placeholder="Type emails, separated by commas" class="inp-fld send" />
                         <input type="submit" class="btn-pink" value="Send" />
                     </form>
                 </div>
@@ -115,6 +115,14 @@ $(function(){
 
     <div class="clear"></div>
 </div>
+
+<script type="text/javascript" src="https://api.cloudsponge.com/address_books.js"></script>
+<script type="text/javascript" charset="utf-8">
+var csPageOptions = {
+  domain_key:"EAHNM54P828ZFP8YWFW6", 
+  textarea_id:"emails"
+};
+</script>
 
 <div id="fb-root"></div>
 <script>
