@@ -112,9 +112,7 @@ Just use this link to sign up and give credit to the person who invited you:
             continue
         messages.append(invite_email(addr))
     
-    connection = get_connection()
-    connection.send_messages(messages)
-    connection.close()
+    get_connection().send_messages(messages)
     return HttpResponseRedirect("{0}?{1}".format(reverse(welcome, args=[signup.id]), urlencode({"emailed": "true"})))
 
 def about(request):
