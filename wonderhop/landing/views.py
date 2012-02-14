@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect
 from django.db import IntegrityError
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
+from django.template.loader import render_to_string
 from django.core.mail import (
     send_mail,
     EmailMessage,
@@ -16,6 +17,7 @@ from django.views.decorators.http import require_POST
 from wonderhop.landing.models import (
     Signup,
     Invite,
+    IncentivePlanRewardTier,
 )
 import random
 import string
@@ -56,17 +58,27 @@ def home(request):
                 # TODO this should be a signal on Signup
                 send_mail(
                     "Thank you for signing up for WonderHop!",
-                    """Thank you for signing up for WonderHop!
-
-As you know, membership is free but limited. If you'd like to be one of the first people given access, all you have to do is share WonderHop with friends by e-mailing/tweeting/Facebooking this custom URL:
-{url}
-
-You can always find out how many people you have referred by coming back to http://wonderhop.com/ and entering your email address again.
-
-Thank you!
-Team WonderHop""".format(url=_referral_url(request, signup)),
+                    render_to_string("welcome_email.txt", { "referral_link": _referral_url(request, signup)}),
                     "WonderHop <contact@wonderhop.com>", [signup.email], fail_silently=True,
                 )
+                
+                if referring_user is not None:
+                    new_reward = None
+                    if referring_user.incentive_plan is not None:
+                        new_rewards = list(referring_user.incentive_plan.reward_tiers.filter(num_signups=referring_user.referred_user_set.count()))
+                        if len(new_rewards) > 0:
+                            # There should only be one, presumably
+                            new_reward = new_rewards[0]
+                    
+                    send_mail(
+                        "Someone you invited signed up for WonderHop",
+                        render_to_string("invite_accepted_email.txt", {
+                            "referral_link": _referral_url(request, referring_user),
+                            "new_reward": new_reward,
+                        }),
+                        "WonderHop <contact@wonderhop.com>", [referring_user.email], fail_silently=True,
+                    )
+                
             return redirect(welcome, signup.id)
         except ValidationError as v:
             context["error"] = "Invalid email address"
