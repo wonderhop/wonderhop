@@ -3,6 +3,7 @@ from wonderhop.landing import views
 
 urlpatterns = patterns("wonderhop.landing.views",
     url(r"^$", views.home),
+    url(r"^login/$", views.login),
     url(r"^about/$", views.about),
     url(r"^privacy/$", views.privacy),
     url(r"^jobs/$", views.jobs),

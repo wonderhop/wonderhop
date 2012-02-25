@@ -1,4 +1,29 @@
-/* @override http://dev.wonderhop.com/static/landing/stylesheets/style.css */
+/*-----------------------------------------------------------------------------------*/
+/* CSS Reset & Clearfix - http://meyerweb.com/eric/tools/css/reset/
+/*-----------------------------------------------------------------------------------*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td { margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%; vertical-align: baseline; background: transparent; } body { line-height: 1; } ol, ul { list-style: none; } blockquote, q { quotes: none; } blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; } :focus { outline: 0; } ins { text-decoration: none; } del { text-decoration: line-through; } table { border-collapse: collapse; border-spacing: 0; }
+
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; } .clearfix { display: inline-block; } /* Hide from IE Mac \*/ .clearfix { display: block; } /* End hide from IE Mac */ .none { display: none; } /* End Clearfix */
+
+
+/*-----------------------------------------------------------------------------------*/
+/* Document Setup
+/*-----------------------------------------------------------------------------------*/
+
+/* @Font Face */
+
+@font-face {
+    font-family: 'BodoniBERegular';
+    src: url('../fonts/bodoni_be_regular-webfont.eot');
+    src: url('../fonts/bodoni_be_regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/bodoni_be_regular-webfont.woff') format('woff'),
+         url('../fonts/bodoni_be_regular-webfont.ttf') format('truetype'),
+         url('../fonts/bodoni_be_regular-webfont.svg#BodoniBERegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 
 @charset "utf-8";
 body {font-family:/*'MuseoSans500',*/ Arial, Helvetica, sans-serif; margin:0; padding:0; font-size:13px; background:url(../img/bg-body.jpg) repeat-y center 0;}
@@ -13,77 +38,14 @@ h1, h2, h3, h4, h5, h6{padding:0; margin:0;}
 h1, h2, h3, h4, h5, h6{font-weight:normal;}
 /*FORM ELEMENT'S STYLES*/
 select,input,textarea,input[type="text"] {font-family:Arial, Helvetica, sans-serif; border:none; outline:none;}
-.inp-fld, input[type="text"]{border:1px solid #dadada; color:#827579; padding:10px 10px; float:left; background:#fff;}
+.inp-fld, input[type="text"]{border:1px solid #dadada; color:#827579; padding:10px 10px; background:#fff;}
 button,input[type="button"]{background:none; cursor:pointer;}
 table{border-spacing:0;}
-/*--------------------------------------- Fonts : Start */
 
-/*--------------------------------------- Fonts : End */
+/*-----------------------------------------------------------------------------------*/
+/* Common Styles
+/*-----------------------------------------------------------------------------------*/
 
-/* Padding Measures Start*/
-/*TOP*/
-.pdtop5{padding-top:5px;}
-.pdtop10{padding-top:10px;}
-.pdtop15{padding-top:15px;}
-.pdtop20{padding-top:20px;}
-.pdtop25{padding-top:25px;}
-.pdtop30{padding-top:30px;}
-/*Right*/
-.pdright5{padding-right:5px;}
-.pdright10{padding-right:10px;}
-.pdright15{padding-right:15px;}
-.pdright20{padding-right:20px;}
-.pdright25{padding-right:25px;}
-.pdright30{padding-right:30px;}
-/*Bottom*/
-.pdbottom5{padding-bottom:5px;}
-.pdbottom10{padding-bottom:10px;}
-.pdbottom15{padding-bottom:15px;}
-.pdbottom20{padding-bottom:20px;}
-.pdbottom25{padding-bottom:25px;}
-.pdbottom30{padding-bottom:30px;}
-/*Left*/
-.pdleft5{padding-left:5px;}
-.pdleft10{padding-left:10px;}
-.pdleft15{padding-left:15px;}
-.pdleft20{padding-left:20px;}
-.pdleft25{padding-left:25px;}
-.pdleft30{padding-left:30px;}
-/* Padding Measures End*/
-
-/* Margin Measures Start*/
-/*Top*/
-.mrtop5{margin-top:5px;}
-.mrtop10{margin-top:10px;}
-.mrtop15{margin-top:15px;}
-.mrtop20{margin-top:20px;}
-.mrtop25{margin-top:25px;}
-.mrtop30{margin-top:30px;}
-.mrtop35{margin-top:35px;}
-/*Right*/
-.mrright5{margin-right:5px;}
-.mrright10{margin-right:10px;}
-.mrright15{margin-right:15px;}
-.mrright20{margin-right:20px;}
-.mrright25{margin-right:25px;}
-.mrright30{margin-right:30px;}
-/*Bottom*/
-.mrbottom5{margin-bottom:5px;}
-.mrbottom10{margin-bottom:10px;}
-.mrbottom15{margin-bottom:15px;}
-.mrbottom20{margin-bottom:20px;}
-.mrbottom25{margin-bottom:25px;}
-.mrbottom30{margin-bottom:30px;}
-/*Left*/
-.mrleft5{margin-left:5px;}
-.mrleft10{margin-left:10px;}
-.mrleft15{margin-left:15px;}
-.mrleft20{margin-left:20px;}
-.mrleft25{margin-left:25px;}
-.mrleft30{margin-left:30px;}
-/* Margin Measures End*/
-
-/* Comman Classes Begin */
 .left{float:left;}
 .right{float:right;}
 .clear{clear:both;}
@@ -93,27 +55,58 @@ table{border-spacing:0;}
 .full-width{float:left; width:100%;}
 .bold{font-weight:bold;}
 
-/*Main Layouting container*/
+
+/*-----------------------------------------------------------------------------------*/
+/* Layout
+/*-----------------------------------------------------------------------------------*/
+
 #wrapper{width:965px; background:#fff; border-left:1px solid #f6f6f6; border-right:1px solid #f6f6f6; margin:auto;}
 #footer{width:100%; float:left; background:#67C2D2; min-height:35px; border-bottom:1px solid #343434; position:fixed; bottom:0;}
-#header{width:100%; float:left; min-height:65px;}
 #container{width:905px; float:left; padding:15px 30px;}
 .footer-box{width:990px; margin:auto;}
 
-/*text link*/
+
+#header{
+	width:100%; 
+	float:left; 
+	min-height:65px;
+	}
+
+#message {
+	min-height: 65px;
+	width: 100%;
+	clear: both;
+	padding: 30px 0 0 30px;
+	}
+/*-----------------------------------------------------------------------------------*/
+/* Typography
+/*-----------------------------------------------------------------------------------*/
 .link-blue{font-size:11px; color:#6bc2d1; font-family:Arial, Helvetica, sans-serif;}
 .link-blue:hover{color:#2DA6BF;}
 
-/*button*/
+h2 {
+	font-family: 'BodoniBERegular', Georgia, sans-serif;
+	font-size: 33px;
+	color: #85d0e1;	
+	width: 550px;
+	}
+
+/*-----------------------------------------------------------------------------------*/
+/* Buttons
+/*-----------------------------------------------------------------------------------*/
 .btn-pink, input[type="button"]{color:#fff; font-size:14px; font-family:"Georgia", Times New Roman, Times, serif;  float:left; background:#EF3D61;}
 .btn-pink:hover, input[type="button"]:hover{background:#AC0F2F;}
 
-/*Header contant in home page*/
+/*-----------------------------------------------------------------------------------*/
+/* Homepage
+/*-----------------------------------------------------------------------------------*/
 #header .wonder{float:left; padding:15px 0 0 20px;}
 .m-id{float:right; background:url(../img/icons01.png) no-repeat right -20px; padding:9px 34px 9px 0; font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:11px; color:#585858; margin:15px 20px 0 0;}
 .m-id:hover{color:#000; background:url(../img/icons01.png) no-repeat right -55px;}
 
-/*Main Navigation at index page*/
+/*-----------------------------------------------------------------------------------*/
+/* Navigation
+/*-----------------------------------------------------------------------------------*/
 #main-nav{width:100%; float:left; border-top:2px solid #7bcad8; border-bottom:2px solid #7bcad8; padding:3px 0;}
 .mnav{width:100%; float:left; border-top:1px solid #a5e2f0; border-bottom:1px solid #a5e2f0;}
 
@@ -129,21 +122,23 @@ table{border-spacing:0;}
 .right-mnav li a{float:left; font-size:14px; font-style:italic; color:#585858; font-family:"Georgia", Times New Roman, Times, serif; padding:7px 10px 10px 12px;}
 .right-mnav li a:hover{color:#000;}
 
-/*Main heading*/
-.main-heading{width:100%; float:left;}
-.main-heading h1{color:#85d0e1; font-size:34px; background:url(../img/bg-main-heading.jpg) repeat-x 0 bottom; padding:0 0 3px; font-family:Georgia, "Times New Roman", Times, serif;}
 
-/*Social Networking area*/
-.lnk-t, .lnk-f{float:left; width:28px; height:28px;}
+
+
+/*-----------------------------------------------------------------------------------*/
+/* Social
+/*-----------------------------------------------------------------------------------*/
+.lnk-t, .lnk-f{float:left; width:28px; height:28px;margin: 5px 0;}
 .lnk-f{background:url(../img/icons01.png) no-repeat 0 -219px;}
 .lnk-f:hover{background-position:0 -247px;}
 .lnk-t{background:url(../img/icons01.png) no-repeat 0 -163px;}
 .lnk-t:hover{background-position:0 -191px;}
 
-/* Footer */
-/*Footer Navigation at left side*/
+/*-----------------------------------------------------------------------------------*/
+/* Footer
+/*-----------------------------------------------------------------------------------*/
 .foot-nav{float:left;}
-.foot-nav a{float:left; font-size:12px; color:#FFF; background:url(../img/seprator-foot-nav.jpg) no-repeat left 17px; margin:0 0 0 2px; padding:10px 10px 9px 12px;}
+.foot-nav a{float:left; font-size:12px; color:#FFF; background:url(../img/seprator-foot-nav.jpg) no-repeat left 17px; margin:0 0 0 2px; padding:12px 10px 9px 12px;}
 .foot-nav a:hover{color:#000;}
 .foot-nav a:first-child{background:none; margin:0;}
 /*Footer Copyright at right side*/
@@ -151,6 +146,12 @@ table{border-spacing:0;}
 .footer-box h6 a{font-size:11px; color:#FFF; float:left; padding:10px 10px 10px 12px;}
 .footer-box h6 a:hover{color:#000;}
 .footer-box-btm{width:100%; float:left; height:250px; border-top:#e8e8e8; background:url(../img/bg-footgrad.png) repeat-x 0 0 #6b6b6b;}
+
+
+/*-----------------------------------------------------------------------------------*/
+/* Forms
+/*-----------------------------------------------------------------------------------*/
+
 
 /*Top right link*/
 .link-blue.b10{font-weight:bold; font-size:10px; float:right;}
@@ -166,23 +167,28 @@ table{border-spacing:0;}
 .form-panel p{border-top:1px dotted #ccc; font-size:15px; color:#585858; margin:20px 0 0; padding:20px 0 0;}
 .form-panel .inp-fld{float:left; padding:7px 10px; width:205px; margin:0 0 0 11px; font-size:13px;}
 .form-panel .s-left{float:left; min-width:145px;}
-.form-panel .s-left h3{float:left; font-size:11px; color:#585858; font-weight:bold; padding:8px 2px 0 25px;}
-.form-panel.left .share-search{clear:both; margin-left:0; padding:15px 0 0 0;}
+.form-panel .s-left h3{font-family: Arial, sans-serif; float:left; font-size:11px; color:#585858; font-weight:bold; padding:14px 2px 0 11px;}
+.form-panel.left .share-search{clear:both; padding:15px 0 0; margin-left:20x;}
 .form-panel.left .share-search .inp-fld{margin-left:15px;} /*input field inharite*/
 .form-panel .lnk-t, .form-panel .lnk-f{margin-left:5px;} /*inharite social media icons*/
+
 /*Social networking sites dom tab*/
-.btn-snet{padding:15px 0 0;}
-.btn-snet a{border:1px solid #6bc2d1; font-size:15px; font-style:italic; color:#6bc2d1; padding:4px 23px; font-family:"Georgia", Times New Roman, Times, serif; display: block;}
-.btn-snet a:hover{border:1px solid #2da6bf; color:#2da6bf;}
-.btn-snet a.active{border:1px solid #6bc2d1; color:#6bc2d1;}
-.or-snet{font-size:17px; font-style:italic; color:#85d0e1; padding:10px 0;}
+.btn-snet{padding:0 0 0 10px;}
+.btn-snet a{float:left; border:1px solid #6bc2d1; font-size:15px; font-style:italic; color:#6bc2d1; padding:4px 23px; margin:0 0 0 5px; font-family:"Georgia", Times New Roman, Times, serif;}
+.btn-snet a:hover{border:1px solid #2da6bf; color:#fff; background-color: #2da6bf;}
+.btn-snet a.active{background-color: #6bc2d1; border:1px solid #6bc2d1; color:#fff;}
+.btn-snet a.active:hover {color: #fff;}
+.or-snet{font-size:17px; font-style:italic; color:#85d0e1; padding:10px 0; width: 380px; font-family: 'BodoniBERegular', Georgia, serif;}
+
 /*bottom of form panel*/
-.share-search{clear:both; padding:0; }
-.share-search .inp-fld.send{ margin:0 0 0 5px; width:286px; height:18px; padding:6px 10px;}
+.share-search{clear:both; padding:0px 0 0;}
+.share-search .inp-fld.send{ margin:0 0 0 5px; width:275px; height:18px; padding:6px 10px;}
 .share-search .btn-pink{background:#EF3D61 url(../img/icons01.png) no-repeat 70px 13px; width:85px; padding:4px 0 6px 15px; font-style:italic; text-align:left; height:32px; line-height:20px;}
 .share-search .btn-pink:hover{background:#AC0F2F url(../img/icons01.png) no-repeat 70px 13px;}
 
-/*Welcome page styles*/
+/*-----------------------------------------------------------------------------------*/
+/* Welcome Page
+/*-----------------------------------------------------------------------------------*/
 /*Body for welcome intro*/
 body#wel-c {background:url(../img/bg-welcome.png) no-repeat center top;}
 /*body#wel-c #wrapper{background:none; border:none;}*/
@@ -209,10 +215,272 @@ body#wel-c {background:url(../img/bg-welcome.png) no-repeat center top;}
 .welbox-contant .btn-pink:hover{background:#AC0F2F url(../img/icons01.png) no-repeat 180px 10px;}
 .f-tip{position:absolute; left:190px; bottom:35px; font-size:12px; color:#77CAD9; background:#fff; padding:2px 8px; font-weight:bold;}
 .emailed { padding: 15px; border: 1px solid #ED3762; margin-bottom: 15px; background-color: rgba(237,55,98,0.20); font-weight: bold; color: #bD1742; }
+#error {color:#EF3D61; font-weight: bold;}
 
 /* Footer for welcome page*/
 #wel-c .footer-box{width:610px; margin:auto;}
 
+/*-----------------------------------------------------------------------------------*/
+/* Login Page
+/*-----------------------------------------------------------------------------------*/
+.logo {/* padding-left: 166px; */ margin:85px 0 0 205px; float: left;}
+.login{width:250px; padding:0; min-height:155px; margin: 30px auto 0;}
+/*
+.login h4,.login h5,.login h6,.login p{float:left;}
+*/
+.login h4{font-size:22px; color:#ed3763;  font-family:'BodoniBERegular', "Georgia", Times New Roman, Times, serif;}
+.login p{font-size:14px; color:#a2a2a2; font-family:Arial, Helvetica, sans-serif; width:100%; margin:5px 0 0; line-height:20px;}
+.login h6{font-size:17px; color:#77CAD9; font-family:"Georgia", Times New Roman, Times, serif; font-style:italic; width:100%; margin:10px 0 0;}
+.login h5{font-size:24px; color:#77CAD9; font-family: 'BodoniBERegular', "Georgia", Times New Roman, Times, serif; float:left; font-weight:bold;}
+.login .link-blue{float:right; margin:10px 0 0; text-decoration:underline; font-weight:bold;}
+.login .link-blue{ text-decoration:underline;}
+.login .inp-fld{clear: left; width:229px; padding:10px 10px; margin:15px 0 0;}
+.login .btn-pink{float: right !important; clear: both; width:100px; background:#EF3D61 url(../img/icons01.png) no-repeat 80px 10px; padding:3px 0 5px 10px; font-style:italic; margin:15px 0 0; text-align:left; height:26px; float:left;}
+.login .btn-pink:hover{background:#AC0F2F url(../img/icons01.png) no-repeat 80px 10px;}
+.f-tip{position:absolute; left:190px; bottom:35px; font-size:12px; color:#77CAD9; background:#fff; padding:2px 8px; font-weight:bold;}
+.login input[type="text"] {font-size:18px;}
 
+/*-----------------------------------------------------------------------------------*/
+/* Invite Page
+/*-----------------------------------------------------------------------------------*/
+.form-panel-box h2 {
+	font-size: 24px;
+	color: #2be1db;
+	font-family: 'BodoniBERegular', Georgia, serif;
+	line-height: 28px;
+	margin-bottom: 20px;
+	width: 400px;
+	}
+.form-panel h3,
+.email h3 {
+	font-size: 25px;
+	font-family: 'BodoniBERegular', Georgia, serif;
+	color: #ed3763;
+	}
+.email h3 {padding-left: 14px;}
+.counter {color: #2be1db; font-size: 50px; font-family: Georgia, serif;
+	position: absolute;
+	top: 75px;
+	left: 185px;
+	}
+#progress {
+	width: 400px;
+	height: 138px;
+	background: url(../img/progress-0.gif) transparent no-repeat 10px -16px;
+	position: relative;
+	}
+.form-panel p {
+	border-top: none;
+	font-size: 16px;
+	color: #585858;
+	margin: 20px 0;
+	padding: 0;
+	text-align: left;
+	width: 350px;
+	line-height: 24px;
+}
+.email p {
+	border-top: none;
+	font-size: 15px;
+	color: #585858;
+	margin: 20px 0;
+	padding: 0 0 0 14px;
+	text-align: left;
+	}
+.form-panel .inp-fld {
+	padding: 11px 10px;
+	width: 230px;
+	margin: 0;
+	font-size: 15px;
+	border: 2px double #6bc2d1;
+	outline: 1px solid #6bc2d1;
+	outline-offset: -4px;
+	}
+.form-panel ul {
+	width: 150px; 
+	float: left;
+	padding-left: 40px;
+	}
+.form-panel .left {	
+	width: 196px;
+	padding-left: 10px;
+	background: transparent url(../img/divider.jpg) repeat-y right 0;
+	}
+.form-panel li {
+	display: block;
+	width: 200px;
+	margin: 15px 0;
+	font-family: Arial, sans-serif;
+	text-transform: uppercase;
+	font-size: 11px;
+	color: #585858;
+	line-height: 22px;
+	letter-spacing: 1px;
+	}
+.form-panel li strong {
+	font-family: Arial, sans-serif;
+	color: #ed3763;
+	font-size: 13px;
+	}
+.form-panel li em {
+	font-size: 19px;
+	font-family: Georgia, serif;
+	color: #2be1db;
+	display: block;
+	text-transform: none;
+	}
+.email {
+	margin: 10px 0 40px;
+	min-height: 300px;
+	width: 100%;
+	}
+.email .share-search .inp-fld.send {
+	width: 500px;
+	height: 23px;
+	padding: 6px 10px;
+	margin: 0 0 0 5px;
+	font-size: 15px;
+	color: #868182;
+	}	
+.email .share-search .btn-pink {
+	float: none;
+	background: #EF3D61 url(../img/icons01.png) no-repeat 70px 15px;
+	width: 85px;
+	padding: 5px 0 6px 15px;
+	font-style: italic;
+	text-align: left;
+	height: 37px;
+	line-height: 20px;
+	}	
+.rule {
+    	background: transparent url(../img/divider.jpg) right 0;
+    	width: 910px;
+    	height: 12px;
+    	margin: 0 auto;	
+	     }
+
+/*-----------------------------------------------------------------------------------*/
+/* Invite Modal
+/*-----------------------------------------------------------------------------------*/
+
+#inline_content {
+	/*	height: 230px; */
+	padding: 24px;
+	background: #fff;
+	position: relative;
+	}
+#inline_content h2 {
+	width: 480px;
+	font-size: 31px;
+	line-height: 36px;
+	text-shadow: #f4f5f4 2px 2px 2px;
+	font-weight: 100;
+	}
+#inline_content p {
+	margin: 10px 0 24px 0;
+	font-size: 14px;
+	line-height: 24px;
+	color: #585858;
+	width: 500px;
+	}
+#inline_content .btn-pink {
+	width: 260px;
+	height: 40px;
+	background-position-x: 240px;
+	float: none;
+	margin: 0 auto !important;
+	padding: 0 0 0 15px;
+	position: absolute;
+	right: 142px;
+	top: 180px;
+	}	
+	
+/*-----------------------------------------------------------------------------------*/
+/* Full Background CSS
+/*-----------------------------------------------------------------------------------*/
+
+/*
 .fullBg {position:fixed; top:0;	left:0; overflow:hidden;}
+*/
 body#wel-c #wrapper{background:none; border:none; position:absolute; top:0; left:0; z-index:50; width:100%;}
+
+
+
+/*-----------------------------------------------------------------------------------*/
+/* Email Section
+/*-----------------------------------------------------------------------------------*/
+
+
+/* -- Loader -- */
+#loading {position: relative; display: none;}
+#loading .invite_gmail {top:20px;position:absolute;left:18px;}
+#loading span.loader-text {letter-spacing: 0.04em;top: 12px;position: absolute;left: 40px;font-size: 13px;display: block;margin-left: 10px;font-weight: normal;}
+#loading span.loader {top:20px;position:absolute;left:18px;}
+
+
+.email, #contacts-content{
+	padding:15px 15px 0;
+	width: 900px;
+	margin-bottom: 100px;
+	clear: both;
+	}
+
+.check {float:left;width:4em;padding-left:1em;}
+.name,.address,.status {padding-top: 2px;}
+.name{float:left;width:17em;}
+.address {float: left; width: 21em;}
+.status{float: left; width: 12em;}
+
+.email-contacts-head {padding:14px 0 30px;background-color:#f5f4f5;color:white; color: #585858; font-style: italic;}
+.email-contacts {
+	height:25em;
+	overflow-y:scroll;
+	overflow-x:hidden;
+	border-bottom: #f4f5f4 10px solid;
+	width:100%;
+	}
+
+.email-contacts ul {list-style-type: none; padding: 0; margin: 0;}
+.email-contact ul li {margin-bottom: 20px;}
+.email-contacts ul li .name,
+.email-contacts ul li .address,
+.email-contacts ul li .status {color: #827579; font-family: Arial, sans-serif; font-size: 13px;}
+.email-contacts ul li .name {width: 17em;}
+.email-contacts ul li .address {width: 21em;}
+.email-contacts ul li .status {width: 14em;}
+.dotted-line{border-bottom:1px dotted #f4f5f4;padding:14px 0; height: 5px;}
+input[type="checkbox"] {vertical-align: top;}
+#invite-head,#invite{margin-left:0;}
+/*
+.total-contacts{float:right;padding-right:14px;font-family:Georgia,serif;font-style:italic;font-weight:lighter;}
+.selected-contacts{border-left:1px;border-left-style:solid;margin-left:5px;padding-left:8px;}
+*/
+.pagination {float: left !important;}
+.pagination a{padding:0 7px;font-size:15px;font-weight:bold; font-family: 'BodoniBERegular', Georgia, serif;  color:#6bc2d1; text-decoration: underline; font-style: italic;}
+.pagination .current{color:#585858; font-family: 'BodoniBERegular', Georgia, serif; font-size: 15px;font-style:normal;padding:0 7px; font-weight:bold; font-style: italic;}
+.pagination a:hover{text-decoration:underline;}
+
+#contacts-content span.btn-pink,
+input[type="button"] {
+	background: #EF3D61 url(../img/icons01.png) no-repeat 120px 17px;
+	width: 80px;
+	height: 20px;
+	padding: 10px 35px 9px 50px;
+	text-align: left;
+	color:#fff; 
+	font-family:"Georgia", Times New Roman, Times, serif;  
+	font-size:14px; 
+	font-style: italic;
+	line-height: 20px;
+	float:right;
+	cursor: pointer;
+	}
+#contacts-content .btn-pink:hover, 
+input[type="button"]:hover{
+	background:#AC0F2F url(../img/icons01.png) no-repeat 120px 17px;
+	}
+
+.floatRight{float:right;}
+.floatLeft{float:left;}
+.clear{clear:both;}
+

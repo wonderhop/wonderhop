@@ -85,6 +85,17 @@ def home(request):
     
     return render(request, "signup.html", context)
 
+def login(request):
+    context = {}
+    if request.method == "POST":
+        try:
+            signup = Signup.objects.get(email=request.POST.get("email", "").strip())
+            return redirect(welcome, signup.id)
+        except (ValidationError, Signup.DoesNotExist):
+            context["error"] = "You're not a member yet."
+    
+    return render(request, "login.html", context)
+
 def welcome(request, signup_id):
     signup = get_object_or_404(Signup, id=signup_id)
     REFERRAL_LINK_TEXT = "Join me on WonderHop for up to 60% off unique decor, kitchen treats, and family finds to make life one-of-a-kind."

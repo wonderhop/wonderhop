@@ -15,26 +15,16 @@
             <a href="{% url wonderhop.landing.views.home %}" class="wonder"><img src="{{ STATIC_URL }}landing/img/wonder-hop.png" alt="" /></a>
         </div>
         <div class="welbox-btm">
-            <!--Left side part Begin-->
-            <div class="welbox-contant left">
-                <h4>Wonderful finds for an inspired home.</h4>
-                <p>Uniquely lovely products to inspire <br />your home, kitchen and family.</p>
-                <h6>All at up to <span class="bold">60%</span> off retail.</h6>
-            </div>
-            <!--Left side part End-->
-            <!--Right side part Begin-->
-            <div class="welbox-contant">
-                <h5>Sign me up!</h5>
+            <div class="login">
                 <form method="POST">
+                <h5>Login</h5>
+                <a href="{% url wonderhop.landing.views.home %}" class="link-blue">BACK</a>
                 {% csrf_token %}
-                <a href="{% url wonderhop.landing.views.login %}" class="link-blue">LOGIN</a>
                 <input name="email" type="email" autofocus class="inp-fld" placeholder="Email address" />
                 <p id="error">{{ error }}</p>
-                <input type="submit" value="Apply for membership" class="btn-pink" />
+                <input type="submit" value="Login" class="btn-pink" />
                 </form>
             </div>
-            <!--Right side part End-->
-
         </div>
         <div class="clear"></div>
     </div>
