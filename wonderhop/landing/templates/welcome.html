@@ -32,16 +32,12 @@ $(function(){
 </script>
 {% endblock %}
 {% block content %}
-<!--Header Begin-->
 <div id="wrapper">
-    <!--Header Begin-->
     <div id="header">
         <a href="{% url wonderhop.landing.views.home %}" class="wonder"><img src="{{ STATIC_URL }}landing/img/wonder-hop.png" alt="" /></a>
         <a href="javascript:void(0);" class="m-id">{{ signup.email }}</a>
     </div>
-    <!--Header End-->
 
-    <!--Main Navigation Begin-->
     <div id="main-nav">
         <div class="mnav">
             <!--
@@ -60,60 +56,67 @@ $(function(){
             -->
         </div>
     </div>
-    <!--Main Navigation Begin-->
-
-    <!--Material Container Begin-->
-    <div id="container">
-        <!-- <div class="full-width"><span class="link-blue b10">– 21 DAYS UNTIL WONDERHOP LAUNCH –</span></div> -->
-        {% if emailed %}
-        <div class="full-width emailed">Your emails have been sent!</div>
-        {% endif %}
-        <div class="main-heading"><h1>Invite Friends, Earn Cash</h1></div>
-        <div class="form-panel-box">
-            <!--Left panel start-->
-            <div class="form-panel left">
-                <h4>1</h4>
-                <h5>Share your personal link</h5>
-                <p>Copy and paste the link below to share it with friends. Your balance is {{ signup.reward_balance }}.</p>
-                <div class="share-search">
-                    <input autofocus type="text" value="{{ referral_url }}" class="inp-fld" />
-                    <div class="s-left">
-                        <h3>SHARE</h3>
-                        <a href="{{ tweet_url }}" class="lnk-t"></a>
-                        <a href="javascript:void(0);" class="lnk-f"></a>
-                    </div>
-                </div>
+    
+    <h2 id="message">Be the first to get WonderHop access. And get cash rewards!</h2>
+    
+    {% if emailed %}
+    <div class="full-width emailed">Your emails have been sent!</div>
+    {% endif %}
+    
+    <div class="form-panel-box">
+        <div class="form-panel left">
+            <div id="progress">
+            <span class="counter">0</span>
             </div>
-            <!--Left panel End-->
-            <!--Right panel start-->
-            <div class="form-panel">
-                <h4>2</h4>
-                <h5>Invite friends by email</h5>
-                <p>Let’s find your friends!</p>
-                <div class="btn-snet">
-                    <a class="cs_import" href="javascript:void(0);">Import from Address Book</a>
-                </div>
-                <!-- A hidden form for contact importer -->
-                <form method="POST" id="hidden_email_form" action="{% url wonderhop.landing.views.share_email signup.id %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="emails">
-                </form>
-                <span class="or-snet">&ndash; or &ndash;</span>
-                <div class="share-search">
-                    <form method="POST" action="{% url wonderhop.landing.views.share_email signup.id %}">
-                        {% csrf_token %}
-                        <input name="emails" type="text" placeholder="Type emails, separated by commas" class="inp-fld send">
-                        <input type="submit" class="btn-pink" value="Send">
-                    </form>
-                </div>
-            </div>
-            <!--Right panel End-->
-
+            <ul class="left">
+                <li><em>5 friends join</em> Wonderhop access</li>
+                <li><em>10 friends join</em> <strong>$10</strong> Wonderhop credit</li>
+            </ul>
+            <ul>
+                <li><em>25 friends join</em> <strong>$20</strong> Wonderhop credit</li>
+                <li><em>50 friends join</em> <strong>$30</strong> Wonderhop credit</li>
+            </ul>
         </div>
+        <div class="form-panel">
+            <h3>Share your personal invite link</h3>
+            <p>Copy and paste the link below to share on Twitter or Facebook</p>
+        
+            <div class="share-search">
+                <input autofocus type="text" value="{{ referral_url }}" class="inp-fld" />
+                <div class="s-left">
+                    <h3>SHARE</h3>
+                    <a href="{{ tweet_url }}" class="lnk-t"></a>
+                    <a href="javascript:void(0);" class="lnk-f"></a>
+                </div><!--End s-left-->
+            </div><!--end share-search-->
+        </div><!--End form-panel-->
+    
+        <div class="clear"></div>
+        <div class="rule"></div>
+    
+        <!-- BEGIN Email Section -->
+        <div class="email">
+            <h3>Invite friends by email</h3>
+            <p>Let’s find your friends!</p>
+            <div class="btn-snet">
+                <a class="cs_import" href="javascript:void(0);">Import from Address Book</a>
+            </div>
+            <!-- A hidden form for contact importer -->
+            <form method="POST" id="hidden_email_form" action="{% url wonderhop.landing.views.share_email signup.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="emails">
+            </form>
 
-    </div>
-    <!--Material Container End-->
-
+            <span class="or-snet">– or –</span>
+            <div class="share-search">
+                <form method="POST" action="{% url wonderhop.landing.views.share_email signup.id %}">
+                    {% csrf_token %}
+                    <input name="emails" type="text" placeholder="Type emails, separated by commas" class="inp-fld send">
+                    <input type="submit" class="btn-pink" value="Send">
+                </form>
+            </div>
+        </div><!-- End email -->
+    </div><!-- End form-panel-box -->
     <div class="clear"></div>
 </div>
 
