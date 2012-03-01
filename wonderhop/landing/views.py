@@ -9,8 +9,8 @@ from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
 from django.core.mail import (
-    send_mail,
     EmailMessage,
+    EmailMultiAlternatives,
     get_connection,
 )
 from django.views.decorators.http import require_POST
@@ -56,11 +56,15 @@ def home(request):
                     else:
                         break
                 # TODO this should be a signal on Signup
-                send_mail(
-                    "Thank you for signing up for WonderHop!",
-                    render_to_string("welcome_email.txt", { "referral_link": _referral_url(request, signup)}),
-                    "WonderHop <contact@wonderhop.com>", [signup.email], fail_silently=True,
+                params = { "referral_link": _referral_url(request, signup)}
+                m = EmailMultiAlternatives(
+                    subject="Thank you for signing up for WonderHop!",
+                    body=render_to_string("welcome_email.txt", params),
+                    from_email="WonderHop <contact@wonderhop.com>",
+                    to=[signup.email]
                 )
+                m.attach_alternative(render_to_string("welcome_email.html", params), "text/html")
+                m.send(fail_silently=True)
                 
                 if referring_user is not None:
                     new_reward = None
@@ -70,14 +74,18 @@ def home(request):
                             # There should only be one, presumably
                             new_reward = new_rewards[0]
                     
-                    send_mail(
-                        "Someone you invited signed up for WonderHop",
-                        render_to_string("invite_accepted_email.txt", {
-                            "referral_link": _referral_url(request, referring_user),
-                            "new_reward": new_reward,
-                        }),
-                        "WonderHop <contact@wonderhop.com>", [referring_user.email], fail_silently=True,
+                    params = {
+                        "referral_link": _referral_url(request, referring_user),
+                        "new_reward": new_reward,
+                    }
+                    m = EmailMultiAlternatives(
+                        subject="Someone you invited signed up for WonderHop",
+                        body=render_to_string("invite_accepted_email.txt", params),
+                        from_email="WonderHop <contact@wonderhop.com>", 
+                        to=[referring_user.email],
                     )
+                    m.attach_alternative(render_to_string("invite_accepted_email.html", params), "text/html")
+                    m.send(fail_silently=True)
                 
             return redirect(welcome, signup.id)
         except ValidationError as v:
@@ -122,15 +130,17 @@ def share_email(request, signup_id):
     signup = get_object_or_404(Signup, id=signup_id)
     
     def invite_email(to_addr):
-        return EmailMessage(
+        params = {
+            "url": _referral_url(request, signup),
+        }
+        m = EmailMultiAlternatives(
                 subject="You've been invited to join WonderHop!",
-                body="""One of your friends has invited you to join WonderHop, where you get up to 60% off unique decor, kitchen treats, and family finds to make life one-of-a-kind.
-
-Just use this link to sign up and give credit to the person who invited you:
-{url}""".format(url=_referral_url(request, signup)),
+                body=render_to_string("invite_email.txt", params),
                 from_email="WonderHop <contact@wonderhop.com>", 
                 to=[to_addr],
             )
+        m.attach_alternative(render_to_string("invite_email.html", params), "text/html")
+        return m
     
     messages = []
     for x in request.POST["emails"].split(","):
