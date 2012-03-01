@@ -36,3 +36,5 @@ admin.site.register(IncentivePlan, IncentivePlanAdmin)
 class LandingSettingsAdmin(admin.ModelAdmin):
     exclude = ("id",)
 admin.site.register(LandingSettings, LandingSettingsAdmin)
+
+admin.site.register(Invite)

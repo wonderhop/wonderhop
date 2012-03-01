@@ -105,6 +105,13 @@ def share_email(request, signup_id):
     for x in request.POST["emails"].split(","):
         addr = x.strip().lower()
         try:
+            existing_signup = Signup.objects.get(email=addr)
+            # If there's an existing signup, skip the invite
+            continue
+        except Signup.DoesNotExist:
+            # Pass, so we invite the user.
+            pass
+        try:
             Invite(sender=signup, recipient=addr).save()
         except (ValidationError, IntegrityError):
             continue
@@ -115,7 +122,8 @@ def share_email(request, signup_id):
         })
     
     try:
-        Subscriber().import_subscribers(settings.CREATESEND_INVITEES_LIST_ID, subscribers, True)
+        if len(subscribers) > 0:
+            Subscriber().import_subscribers(settings.CREATESEND_INVITEES_LIST_ID, subscribers, True)
     except Exception:
         logging.exception("Exception importing invites to list")
     
