@@ -100,6 +100,11 @@ def welcome(request, signup_id):
     signup = get_object_or_404(Signup, id=signup_id)
     REFERRAL_LINK_TEXT = "Join me on WonderHop for up to 60% off unique decor, kitchen treats, and family finds to make life one-of-a-kind."
     
+    if signup.incentive_plan is None:
+        reward_tiers = []
+    else:
+        reward_tiers = signup.incentive_plan.reward_tiers.order_by("num_signups").all()
+    
     return render(request, "welcome.html", {
         "signup": signup,
         "referral_url": _referral_url(request, signup),
@@ -109,6 +114,7 @@ def welcome(request, signup_id):
         })),
         "facebook_link_caption": REFERRAL_LINK_TEXT,
         "emailed": "emailed" in request.GET,
+        "reward_tiers": reward_tiers,
     })
 
 @require_POST

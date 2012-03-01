@@ -85,12 +85,12 @@ $(function(){
             <span class="counter">{{ signup.referred_user_set.count }}</span>
             </div>
             <ul class="left">
-                <li><em>5 friends join</em> Wonderhop access</li>
-                <li><em>10 friends join</em> <strong>$10</strong> Wonderhop credit</li>
+                {% if reward_tiers.0 %}<li><em>{{ reward_tiers.0.num_signups }} friends join</em> <strong>${{ reward_tiers.0.reward }}</strong> Wonderhop credit</li>{% endif %}
+                {% if reward_tiers.1 %}<li><em>{{ reward_tiers.1.num_signups }} friends join</em> <strong>${{ reward_tiers.1.reward }}</strong> Wonderhop credit</li>{% endif %}
             </ul>
             <ul>
-                <li><em>25 friends join</em> <strong>$20</strong> Wonderhop credit</li>
-                <li><em>50 friends join</em> <strong>$30</strong> Wonderhop credit</li>
+                {% if reward_tiers.2 %}<li><em>{{ reward_tiers.2.num_signups }} friends join</em> <strong>${{ reward_tiers.2.reward }}</strong> Wonderhop credit</li>{% endif %}
+                {% if reward_tiers.3 %}<li><em>{{ reward_tiers.3.num_signups }} friends join</em> <strong>${{ reward_tiers.3.reward }}</strong> Wonderhop credit</li>{% endif %}
             </ul>
         </div>
         <div class="form-panel">
