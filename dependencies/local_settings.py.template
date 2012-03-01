@@ -12,6 +12,6 @@ DATABASES = {
 DEBUG = %(debug)s
 TEMPLATE_DEBUG = %(debug)s
 LANDING_PAGE = %(landing)s
-HOSTNAME = %(hostname)s
+HOSTNAME = "%(hostname)s"
 CREATESEND_SIGNUPS_LIST_ID = "%(signups_list_id)s"
 CREATESEND_INVITEES_LIST_ID = "%(invitees_list_id)s"
