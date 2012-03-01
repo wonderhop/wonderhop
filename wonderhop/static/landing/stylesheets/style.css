@@ -362,27 +362,27 @@ body#wel-c {background:url(../img/bg-welcome.png) no-repeat center top;}
 /* Invite Modal
 /*-----------------------------------------------------------------------------------*/
 
-#inline_content {
+#modal {
 	/*	height: 230px; */
 	padding: 24px;
 	background: #fff;
 	position: relative;
 	}
-#inline_content h2 {
+#modal h2 {
 	width: 480px;
 	font-size: 31px;
 	line-height: 36px;
 	text-shadow: #f4f5f4 2px 2px 2px;
 	font-weight: 100;
 	}
-#inline_content p {
+#modal p {
 	margin: 10px 0 24px 0;
 	font-size: 14px;
 	line-height: 24px;
 	color: #585858;
 	width: 500px;
 	}
-#inline_content .btn-pink {
+#modal .btn-pink {
 	width: 260px;
 	height: 40px;
 	background-position-x: 240px;

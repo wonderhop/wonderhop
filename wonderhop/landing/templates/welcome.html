@@ -1,7 +1,23 @@
 {% extends "landing.html" %}
 {% block extrahead %}
+<link rel="stylesheet" href="{{ STATIC_URL }}landing/colorbox/colorbox.css" />
+<script src="{{ STATIC_URL }}landing/colorbox/jquery.colorbox.js"></script>
 <script>
 $(function(){
+    $.colorbox({
+        inline: true,
+        href: "#modal",
+        width: "544px",
+        height: "255px",
+        transition: "none",
+        opacity: ".5",
+        open: true,
+    });
+    
+    $("#modal .close").click(function(){
+        $.colorbox.close();
+    });
+
     $(".lnk-t").click(function(e){
         var width  = 575,
         height = 220,
@@ -118,6 +134,17 @@ $(function(){
         </div><!-- End email -->
     </div><!-- End form-panel-box -->
     <div class="clear"></div>
+</div>
+
+<div style="display:none">
+    <div id="modal">
+        <h2><strong>Be the first to get WonderHop access. And get cash rewards!</strong></h2>
+        <p>
+            <strong>All new member openings are currently reserved.</strong>
+            But you can skip the line by inviting your friends to join WonderHop. Plus, earn amazing <em>cash rewards!</em>
+        </p>
+        <input type="button" class="btn-pink close" value="Invite Friends, Get Cash Rewards" />
+    </div>
 </div>
 
 <script type="text/javascript" src="https://api.cloudsponge.com/address_books.js"></script>
