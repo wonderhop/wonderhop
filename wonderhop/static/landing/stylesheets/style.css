@@ -172,8 +172,8 @@ h2 {
 .form-panel .lnk-t, .form-panel .lnk-f{margin-left:5px;} /*inharite social media icons*/
 
 /*Social networking sites dom tab*/
-.btn-snet{padding:0 0 0 10px;}
-.btn-snet a{float:left; border:1px solid #6bc2d1; font-size:15px; font-style:italic; color:#6bc2d1; padding:4px 23px; margin:0 0 0 5px; font-family:"Georgia", Times New Roman, Times, serif;}
+.btn-snet {text-align: left;}
+.btn-snet a{float: left;border:1px solid #6bc2d1; font-size:15px; font-style:italic; color:#6bc2d1; padding:4px 23px; font-family:"Georgia", Times New Roman, Times, serif;}
 .btn-snet a:hover{border:1px solid #2da6bf; color:#fff; background-color: #2da6bf;}
 .btn-snet a.active{background-color: #6bc2d1; border:1px solid #6bc2d1; color:#fff;}
 .btn-snet a.active:hover {color: #fff;}
@@ -181,7 +181,7 @@ h2 {
 
 /*bottom of form panel*/
 .share-search{clear:both; padding:0px 0 0;}
-.share-search .inp-fld.send{ margin:0 0 0 5px; width:275px; height:18px; padding:6px 10px;}
+.share-search .inp-fld.send{ width:275px; height:18px; padding:6px 10px;}
 .share-search .btn-pink{background:#EF3D61 url(../img/icons01.png) no-repeat 70px 13px; width:85px; padding:4px 0 6px 15px; font-style:italic; text-align:left; height:32px; line-height:20px;}
 .share-search .btn-pink:hover{background:#AC0F2F url(../img/icons01.png) no-repeat 70px 13px;}
 
@@ -213,7 +213,7 @@ body#wel-c {background:url(../img/bg-welcome.png) no-repeat center top;}
 .welbox-contant .btn-pink{width:200px; background:#EF3D61 url(../img/icons01.png) no-repeat 180px 10px; padding:3px 0 5px 10px; font-style:italic; margin:15px 0 0; text-align:left; height:26px; float:left;}
 .welbox-contant .btn-pink:hover{background:#AC0F2F url(../img/icons01.png) no-repeat 180px 10px;}
 .f-tip{position:absolute; left:190px; bottom:35px; font-size:12px; color:#77CAD9; background:#fff; padding:2px 8px; font-weight:bold;}
-.emailed { padding: 15px; border: 1px solid #ED3762; margin-bottom: 15px; background-color: rgba(237,55,98,0.20); font-weight: bold; color: #bD1742; }
+.emailed { padding: 15px; border: 1px solid #ED3762; background-color: rgba(237,55,98,0.20); margin-top: 20px; font-weight: bold; color: #bD1742; }
 #error {color:#EF3D61; font-weight: bold;}
 
 /* Footer for welcome page*/
@@ -256,7 +256,6 @@ body#wel-c {background:url(../img/bg-welcome.png) no-repeat center top;}
 	font-family: 'BodoniBERegular', Georgia, serif;
 	color: #ed3763;
 	}
-.email h3 {padding-left: 14px;}
 .counter {color: #2be1db; font-size: 50px; font-family: Georgia, serif;
 	position: absolute;
 	top: 75px;
@@ -283,7 +282,6 @@ body#wel-c {background:url(../img/bg-welcome.png) no-repeat center top;}
 	font-size: 15px;
 	color: #585858;
 	margin: 20px 0;
-	padding: 0 0 0 14px;
 	text-align: left;
 	}
 .form-panel .inp-fld {
@@ -329,7 +327,7 @@ body#wel-c {background:url(../img/bg-welcome.png) no-repeat center top;}
 	text-transform: none;
 	}
 .email {
-	margin: 10px 0 40px;
+	margin: 10px 0 40px 14px;
 	min-height: 300px;
 	width: 100%;
 	}
@@ -337,7 +335,6 @@ body#wel-c {background:url(../img/bg-welcome.png) no-repeat center top;}
 	width: 500px;
 	height: 23px;
 	padding: 6px 10px;
-	margin: 0 0 0 5px;
 	font-size: 15px;
 	color: #868182;
 	}	
