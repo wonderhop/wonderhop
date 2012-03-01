@@ -26,11 +26,17 @@ def dev():
     env.hosts = ["dev.wonderhop.com"]
     env.landing = True
     env.debug = True
+    env.hostname = "dev.wonderhop.com"
+    env.signups_list_id = "f2211b14db74bd2daecbfbf0a852103e"
+    env.invitees_list_id = "4973349a2d227f7171b01d3c2ae93334"
 
 def production():
     env.hosts = ["live.wonderhop.com"]
     env.landing = True
     env.debug = True
+    env.hostname = "wonderhop.com"
+    env.signups_list_id = "8325a51d2353a269ae4322ab8e2a4b2a"
+    env.invitees_list_id = "22c33bd242d8ff59376bb00b5e89f956"
 
 env.repo_root = "/home/wonderhop/wonderhop"
 env.proj_root = "/home/wonderhop/wonderhop/wonderhop"

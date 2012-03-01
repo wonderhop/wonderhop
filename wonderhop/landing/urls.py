@@ -9,5 +9,5 @@ urlpatterns = patterns("wonderhop.landing.views",
     url(r"^jobs/$", views.jobs),
     url(r"^welcome/(\d+)/$", views.welcome),
     url(r"^welcome/(\d+)/email/$", views.share_email),
-    url(r"^r/(\w+)$", views.refer),
+    url(r"^r/(\w+)$", views.refer, name="refer"),
 )

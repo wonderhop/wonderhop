@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect
 from django.db import IntegrityError
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
-from django.template.loader import render_to_string
+from django.conf import settings
 from django.core.mail import (
     EmailMessage,
     EmailMultiAlternatives,
@@ -21,13 +21,12 @@ from wonderhop.landing.models import (
 )
 import random
 import string
+import logging
 from urllib import urlencode
+from createsend import Subscriber
 
 def _id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return "".join(random.choice(chars) for x in range(size))
-
-def _referral_url(request, signup):
-    return request.build_absolute_uri(reverse(refer, args=[signup.referral_key]))
 
 def home(request):
     context = {}
@@ -55,37 +54,6 @@ def home(request):
                             raise
                     else:
                         break
-                # TODO this should be a signal on Signup
-                params = { "referral_link": _referral_url(request, signup)}
-                m = EmailMultiAlternatives(
-                    subject="Thank you for signing up for WonderHop!",
-                    body=render_to_string("welcome_email.txt", params),
-                    from_email="WonderHop <contact@wonderhop.com>",
-                    to=[signup.email]
-                )
-                m.attach_alternative(render_to_string("welcome_email.html", params), "text/html")
-                m.send(fail_silently=True)
-                
-                if referring_user is not None:
-                    new_reward = None
-                    if referring_user.incentive_plan is not None:
-                        new_rewards = list(referring_user.incentive_plan.reward_tiers.filter(num_signups=referring_user.referred_user_set.count()))
-                        if len(new_rewards) > 0:
-                            # There should only be one, presumably
-                            new_reward = new_rewards[0]
-                    
-                    params = {
-                        "referral_link": _referral_url(request, referring_user),
-                        "new_reward": new_reward,
-                    }
-                    m = EmailMultiAlternatives(
-                        subject="Someone you invited signed up for WonderHop",
-                        body=render_to_string("invite_accepted_email.txt", params),
-                        from_email="WonderHop <contact@wonderhop.com>", 
-                        to=[referring_user.email],
-                    )
-                    m.attach_alternative(render_to_string("invite_accepted_email.html", params), "text/html")
-                    m.send(fail_silently=True)
                 
             return redirect(welcome, signup.id)
         except ValidationError as v:
@@ -115,9 +83,9 @@ def welcome(request, signup_id):
     
     return render(request, "welcome.html", {
         "signup": signup,
-        "referral_url": _referral_url(request, signup),
+        "referral_url": signup.referral_url(),
         "tweet_url": "https://twitter.com/share?{0}".format(urlencode({
-            "url": _referral_url(request, signup),
+            "url": signup.referral_url(),
             "text": REFERRAL_LINK_TEXT,
         })),
         "facebook_link_caption": REFERRAL_LINK_TEXT,
@@ -129,29 +97,28 @@ def welcome(request, signup_id):
 def share_email(request, signup_id):
     signup = get_object_or_404(Signup, id=signup_id)
     
-    def invite_email(to_addr):
-        params = {
-            "url": _referral_url(request, signup),
-        }
-        m = EmailMultiAlternatives(
-                subject="You've been invited to join WonderHop!",
-                body=render_to_string("invite_email.txt", params),
-                from_email="WonderHop <contact@wonderhop.com>", 
-                to=[to_addr],
-            )
-        m.attach_alternative(render_to_string("invite_email.html", params), "text/html")
-        return m
+    fields = [{"Key": k, "Value": v} for k, v in {
+        "inviter_referral_url": signup.referral_url(),
+    }.iteritems()]
+    subscribers = []
     
-    messages = []
     for x in request.POST["emails"].split(","):
         addr = x.strip().lower()
         try:
             Invite(sender=signup, recipient=addr).save()
         except (ValidationError, IntegrityError):
             continue
-        messages.append(invite_email(addr))
+        subscribers.append({
+            "EmailAddress": addr,
+            "Name": "Unknown",
+            "CustomFields": fields,
+        })
     
-    get_connection().send_messages(messages)
+    try:
+        Subscriber().import_subscribers(settings.CREATESEND_INVITEES_LIST_ID, subscribers, True)
+    except Exception:
+        logging.exception("Exception importing invites to list")
+    
     return HttpResponseRedirect("{0}?{1}".format(reverse(welcome, args=[signup.id]), urlencode({"emailed": "true"})))
 
 def about(request):

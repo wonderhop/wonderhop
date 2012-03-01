@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.urlresolvers import reverse
+from django.conf import settings
 from decimal import Decimal
 
 class IncentivePlan(models.Model):
@@ -42,6 +44,10 @@ class Signup(models.Model):
         
         return invited_rewards + invitee_incentive
 
+    def referral_url(self):
+        # Ugh. There's no better way to do this AFAIK without a request object (which isn't available in signals)
+        return "".join(["http://", settings.HOSTNAME, reverse("refer", args=[self.referral_key])])
+
 class Invite(models.Model):
     sender = models.ForeignKey(Signup, related_name="sent_invites_set")
     recipient = models.EmailField()
@@ -62,3 +68,5 @@ class LandingSettings(models.Model):
 
     class Meta:
         verbose_name_plural = "Landing Settings"
+
+import wonderhop.landing.signals

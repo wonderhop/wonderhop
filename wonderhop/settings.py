@@ -27,6 +27,9 @@ DATABASES = {
 # Make this unique, and don"t share it with anybody.
 SECRET_KEY = "k5198u4y2)$%2(p4k6*rkj3kdge03qba@&(9@f$zk_+1k__w^z"
 
+from createsend import CreateSend
+CreateSend.api_key = "60147aa025c0095efc45e821beb1809e"
+
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
     "django.core.context_processors.debug",
@@ -51,6 +54,12 @@ INSTALLED_APPS = (
     "south",
     "wonderhop.landing",
 )
+
+import socket
+try:
+    HOSTNAME = socket.gethostname()
+except:
+    HOSTNAME = "localhost"
 
 try:
     from local_settings import *
