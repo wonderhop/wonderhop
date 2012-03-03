@@ -10,5 +10,5 @@ urlpatterns = patterns("wonderhop.landing.views",
     url(r"^welcome/(\d+)/$", views.welcome),
     url(r"^welcome/(\d+)/email/$", views.share_email),
     url(r"^r/(\w+)$", views.refer, name="refer"),
-    url(r"^a/(\w+)$", views.advertisement_landing),
+    url(r"^a/([^/]+)/?$", views.advertisement_landing),
 )
