@@ -21,7 +21,7 @@ class SignupAdmin(admin.ModelAdmin):
     inlines = [
         InviteInline,
     ]
-    list_display = ("email", "sign_up_date", "referring_user", num_invites_sent, num_referred_users)
+    list_display = ("email", "sign_up_date", "referring_user", "advertisement_id", num_invites_sent, num_referred_users)
     readonly_fields = ("sign_up_date",)
 admin.site.register(Signup, SignupAdmin)
 
