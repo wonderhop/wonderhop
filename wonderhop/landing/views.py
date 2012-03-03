@@ -63,6 +63,12 @@ def home(request):
         except ValidationError as v:
             context["error"] = "Invalid email address"
     
+    for track_event in ["advertisement_id", "referral_key"]:
+        tracked_key = "tracked_{0}".format(track_event)
+        if track_event in request.session and tracked_key not in request.session:
+            context["event_{0}".format(track_event)] = request.session[track_event]
+            request.session[tracked_key] = True
+    
     return render(request, "signup.html", context)
 
 def login(request):
