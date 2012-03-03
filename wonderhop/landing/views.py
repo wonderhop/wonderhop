@@ -44,7 +44,7 @@ def home(request):
                 signup = Signup(
                     email=email,
                     referring_user=referring_user,
-                    advertisement_id=request.session.get("advertisement_id", None) or None, # empty string to None
+                    advertisement_id=request.session.get("advertisement_id", None),
                     backstretch_url=request.POST.get("backstretch_url", None),
                 )
                 # Validate the email field, raise ValidationError if it fails
