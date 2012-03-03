@@ -189,7 +189,7 @@ h2 {
 /* Welcome Page
 /*-----------------------------------------------------------------------------------*/
 /*Body for welcome intro*/
-body#wel-c {background:url(../img/bg-welcome.png) no-repeat center top;}
+body#wel-c {}
 /*body#wel-c #wrapper{background:none; border:none;}*/
 
 /*Welcome box*/
