@@ -45,6 +45,7 @@ def home(request):
                     email=email,
                     referring_user=referring_user,
                     advertisement_id=request.session.get("advertisement_id", None),
+                    backstretch_url=request.POST.get("backstretch_url", None),
                 )
                 # Validate the email field, raise ValidationError if it fails
                 signup.clean_fields(exclude=["referral_key"])

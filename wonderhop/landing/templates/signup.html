@@ -31,6 +31,7 @@ d.write('<sc'+'ript src="'+
 $(function(){
     var backstretch_url = utmx("variation_content", "backstretch_url") || "{{ STATIC_URL }}landing/img/bg-welcome.png";
     $.backstretch(backstretch_url);
+    $("input[name=backstretch_url]").val(backstretch_url);
 });
 </script>
 {% endblock %}
@@ -58,6 +59,7 @@ $(function(){
                 {% csrf_token %}
                 <a href="{% url wonderhop.landing.views.login %}" class="link-blue">LOGIN</a>
                 <input name="email" type="email" autofocus class="inp-fld" placeholder="Email address" />
+                <input type="hidden" name="backstretch_url">
                 <p id="error">{{ error }}</p>
                 <input type="submit" value="Apply for membership" class="btn-pink" />
                 </form>
