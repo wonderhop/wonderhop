@@ -99,6 +99,7 @@ def share_email(request, signup_id):
     
     fields = [{"Key": k, "Value": v} for k, v in {
         "inviter_referral_url": signup.referral_url(),
+        "inviter_email": signup.email,
     }.iteritems()]
     subscribers = []
     
