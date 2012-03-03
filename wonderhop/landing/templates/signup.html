@@ -28,9 +28,12 @@ d.write('<sc'+'ript src="'+
 {% endblock %}
 {% block extrahead %}
 <script>
+$(function(){
     console.log(utmx("variation_content", "backstretch_url"));
     var backstretch_url = utmx("variation_content", "backstretch_url") || "{{ STATIC_URL }}landing/img/bg-welcome.png";
+    console.log(backstretch_url);
     $.backstretch(backstretch_url);
+});
 </script>
 {% endblock %}
 {% block bodyid %}wel-c{% endblock %}
