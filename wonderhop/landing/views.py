@@ -44,7 +44,7 @@ def home(request):
                 signup = Signup(
                     email=email,
                     referring_user=referring_user,
-                    advertisement_id=request.session.get("advertisement_id", None),
+                    advertisement_id=request.session.get("advertisement_id", None) or None, # empty string to None
                     backstretch_url=request.POST.get("backstretch_url", None),
                 )
                 # Validate the email field, raise ValidationError if it fails
@@ -61,11 +61,8 @@ def home(request):
                         break
                 
             return redirect(welcome, signup.id)
-        except ValueError:
-            pass
-        #except ValidationError as v:
-        #    logging.error(v)
-        #    context["error"] = "Invalid email address"
+        except ValidationError as v:
+            context["error"] = "Invalid email address"
     
     for track_event in ["advertisement_id", "referral_key"]:
         tracked_key = "tracked_{0}".format(track_event)
