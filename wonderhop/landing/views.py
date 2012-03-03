@@ -62,6 +62,7 @@ def home(request):
                 
             return redirect(welcome, signup.id)
         except ValidationError as v:
+            logging.error(e.message)
             context["error"] = "Invalid email address"
     
     for track_event in ["advertisement_id", "referral_key"]:
