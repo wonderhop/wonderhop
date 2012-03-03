@@ -33,8 +33,21 @@
 
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-29171134-1']);
+  var advertisement_id = $.cookies.get('advertisement_id');
+  if (advertisement_id !== null && $.cookies.get('tracked_advertisement_id') !== true) {
+    _gaq.push(['_trackEvent', 'advertisement', advertisement_id]);
+    $.cookies.set('tracked_advertisement_id', true);
+  }
+  console.log(advertisement_id);
+  var referral_key = $.cookies.get('referral_key');
+  if (referral_key !== null && $.cookies.get('tracked_referral_key') !== true) {
+    _gaq.push(['_trackEvent', 'referral', referral_key]);
+    $.cookies.set('tracked_referral_key', true);
+  }
+  console.log(referral_key);
   _gaq.push(['_trackPageview']);
-
+  
+  
   (function() {
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
