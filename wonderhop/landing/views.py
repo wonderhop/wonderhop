@@ -41,7 +41,11 @@ def home(request):
             try:
                 signup = Signup.objects.get(email=email)
             except Signup.DoesNotExist:
-                signup = Signup(email=email, referring_user=referring_user)
+                signup = Signup(
+                    email=email,
+                    referring_user=referring_user,
+                    advertisement_id=request.session.get("advertisement_id", None),
+                )
                 # Validate the email field, raise ValidationError if it fails
                 signup.clean_fields(exclude=["referral_key"])
                 MAX_ATTEMPTS = 5
@@ -141,4 +145,8 @@ def jobs(request):
 
 def refer(request, referral_key):
     request.session["referral_key"] = referral_key
+    return redirect(home)
+
+def advertisement_landing(request, advertisement_id):
+    request.session["advertisement_id"] = advertisement_id
     return redirect(home)
