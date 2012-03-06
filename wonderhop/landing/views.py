@@ -158,7 +158,7 @@ def share_email(request, signup_id):
     
     try:
         if len(subscribers) > 0:
-            Subscriber().import_subscribers(settings.CREATESEND_INVITEES_LIST_ID, subscribers, True)
+            Subscriber().import_subscribers(settings.CREATESEND_INVITEES_LIST_ID, subscribers, True, queue_subscription_based_autoresponders=True)
     except Exception:
         logging.exception("Exception importing invites to list")
     
