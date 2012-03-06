@@ -148,6 +148,13 @@ $(function(){
                 <div class="emailed">Your emails have been sent!</div>
                 {% endif %}
             </div>
+            
+            <table id="invited">
+                <tr><th>Email</th><th>Status</th></tr>
+                {% for invited_user in invited_users %}
+                <tr><td>{{ invited_user.email }}</td><td class="{{ invited_user.description_class }}">{{ invited_user.description }}</td></tr>
+                {% endfor %}
+            </table>
         </div><!-- End email -->
     </div><!-- End form-panel-box -->
     <div class="clear"></div>

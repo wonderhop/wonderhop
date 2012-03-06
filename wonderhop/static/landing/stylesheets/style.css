@@ -480,3 +480,21 @@ input[type="button"]:hover{
 .floatLeft{float:left;}
 .clear{clear:both;}
 
+/* Invited table */
+
+#invited {
+	margin-top: 2em;
+	color: #827579;
+	font-family: Arial, sans-serif;
+	font-size: 13px;
+	width: 100%;
+}
+#invited td, #invited th {
+	padding: 10px;
+}
+#invited th {
+	background-color: #F5F4F5;
+	color: #585858;
+	font-weight: normal;
+	font-style: oblique;
+}
