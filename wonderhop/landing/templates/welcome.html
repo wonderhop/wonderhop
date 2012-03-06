@@ -118,6 +118,7 @@ $(function(){
             <div id="progress">
             <canvas id="progress_canvas" width="400" height="138"></canvas>
             <span class="counter">{{ signup.referred_user_set.count }}</span>
+            <span class="counter_label">friends joined</span>
             </div>
             <ul class="left">
                 {% if reward_tiers.0 %}<li><em>{{ reward_tiers.0.num_signups }} friends join</em> <strong>${{ reward_tiers.0.reward }}</strong> Wonderhop credit</li>{% endif %}

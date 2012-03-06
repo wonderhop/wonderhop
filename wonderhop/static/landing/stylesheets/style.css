@@ -256,10 +256,22 @@ body#wel-c {}
 	font-family: 'BodoniBERegular', Georgia, serif;
 	color: #ed3763;
 	}
-.counter {color: #2be1db; font-size: 50px; font-family: Georgia, serif;
+.counter, .counter_label {
+	color: #2be1db;
+	font-family: Georgia, serif;
 	position: absolute;
-	top: 75px;
+}
+.counter {
+	font-size: 45px;
+	top: 65px;
 	left: 185px;
+	}
+.counter_label {
+	font-size: 20px;
+	top: 110px;
+	left: 0px;
+	right: 0px;
+	text-align: center;
 	}
 #progress {
 	width: 400px;
