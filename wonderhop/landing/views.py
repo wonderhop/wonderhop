@@ -92,7 +92,8 @@ def welcome(request, signup_id):
     else:
         reward_tiers = signup.incentive_plan.reward_tiers.order_by("num_signups").all()
     
-    def sent_invite_info(invite):
+    invited_users = {} # Don't show duplicate invites
+    for invite in signup.sent_invites_set.all():
         try:
             invite_signup = Signup.objects.get(email=invite.recipient)
             if invite_signup.referring_user == signup:
@@ -101,7 +102,7 @@ def welcome(request, signup_id):
                 description, description_class = "Signed up from someone else's invite", "signed_up_other"
         except Signup.DoesNotExist:
             description, description_class = "Invited, Not Joined", "not_signed_up"
-        return {
+        invited_users[invite.recipient] = {
             "email": invite.recipient,
             "description": description,
             "description_class": description_class,
@@ -117,7 +118,7 @@ def welcome(request, signup_id):
         "facebook_link_caption": REFERRAL_LINK_TEXT,
         "emailed": "emailed" in request.GET,
         "reward_tiers": reward_tiers,
-        "invited_users": map(sent_invite_info, signup.sent_invites_set.all()),
+        "invited_users": invited_users.values(),
     })
 
 @require_POST
