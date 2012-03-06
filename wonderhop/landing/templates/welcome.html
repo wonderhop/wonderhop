@@ -60,7 +60,28 @@ $(function(){
           function(response) {}
         );
         e.preventDefault();
-    })
+    });
+    
+    var percent_filled = {{ signup.referred_user_set.count }} / {{ max_reward_tier_signups }};
+    
+    var canvas = $("#progress_canvas")[0];
+    var ctx = canvas.getContext("2d");
+    ctx.fillStyle = "#E3E3E3";
+    ctx.arc(200, 122, 99, Math.PI, Math.PI * 2, false);
+    ctx.arc(200, 122, 75, Math.PI * 2, Math.PI, true);
+    ctx.fill();
+    ctx.fillStyle = "#EBEBEB";
+    ctx.beginPath();
+    ctx.arc(200, 120, 100, Math.PI, Math.PI * 2, false);
+    ctx.arc(200, 120, 75, Math.PI * 2, Math.PI, true);
+    ctx.fill();
+    
+    ctx.fillStyle = "#CEE6EB";
+    ctx.beginPath();
+    var to_angle = Math.PI + Math.PI * percent_filled;
+    ctx.arc(200, 120, 100, Math.PI, to_angle, false);
+    ctx.arc(200, 120, 75, to_angle, Math.PI, true);
+    ctx.fill();
 });
 </script>
 {% endblock %}
@@ -95,6 +116,7 @@ $(function(){
     <div class="form-panel-box">
         <div class="form-panel left">
             <div id="progress">
+            <canvas id="progress_canvas" width="400" height="138"></canvas>
             <span class="counter">{{ signup.referred_user_set.count }}</span>
             </div>
             <ul class="left">

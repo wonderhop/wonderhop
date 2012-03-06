@@ -89,8 +89,10 @@ def welcome(request, signup_id):
     
     if signup.incentive_plan is None:
         reward_tiers = []
+        max_reward_tier_signups = 1
     else:
-        reward_tiers = signup.incentive_plan.reward_tiers.order_by("num_signups").all()
+        reward_tiers = list(signup.incentive_plan.reward_tiers.order_by("num_signups").all())
+        max_reward_tier_signups = reward_tiers[-1].num_signups
     
     invited_users = []
     invited_emails = set() # Don't show duplicate invites
@@ -121,6 +123,7 @@ def welcome(request, signup_id):
         "facebook_link_caption": REFERRAL_LINK_TEXT,
         "emailed": "emailed" in request.GET,
         "reward_tiers": reward_tiers,
+        "max_reward_tier_signups": max_reward_tier_signups,
         "invited_users": invited_users,
     })
 

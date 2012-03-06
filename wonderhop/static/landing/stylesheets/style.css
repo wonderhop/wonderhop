@@ -264,7 +264,6 @@ body#wel-c {}
 #progress {
 	width: 400px;
 	height: 138px;
-	background: url(../img/progress-0.gif) transparent no-repeat 10px -16px;
 	position: relative;
 	}
 .form-panel p {
