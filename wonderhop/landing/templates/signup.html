@@ -29,7 +29,7 @@ d.write('<sc'+'ript src="'+
 {% block extrahead %}
 <script>
 $(function(){
-    var backstretch_url = utmx("variation_content", "backstretch_url") || "{{ STATIC_URL }}landing/img/bg-welcome.png";
+    var backstretch_url = utmx("variation_content", "backstretch_url") || "{{ STATIC_URL }}landing/img/bg-welcome.jpg";
     $.backstretch(backstretch_url);
     $("input[name=backstretch_url]").val(backstretch_url);
 });
