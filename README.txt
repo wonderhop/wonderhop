@@ -24,6 +24,14 @@ Getting Started
         (env)$ cd wonderhop/
         (env)$ python manage.py syncdb
     
+-   migrate to apply South migrations
+    
+        (env)$ python manage.py migrate
+    
+-   copy the default local settings file to get some sensible defaults
+    
+        (env)$ cp local_settings.py.dist local_settings.py
+    
 -   runserver to start developing
     
         (env)$ python manage.py runserver
@@ -37,13 +45,21 @@ Deploying
 
 We use fabric for deployments; it should have been installed above via pip.
 
-fabfile.py defines a few "roles": dev, staging, and production.
+fabfile.py defines two sets of server settings, dev and production.
 
 -   Deploy to dev:
 
-        (env)$ fab -R dev deploy
+        (env)$ fab dev update
+
+-   Deploy to production:
+
+        (env)$ fab production update
 
 -   Initializing a brand-new Linode Ubuntu Server instance
-    (Or, initialize a role using `-R` instead of `-H`.)
 
         (env)$ fab -H new-server-hostname init_all
+
+After you change config files, you'll need to run the copy_config_files task.
+
+After you install new Python packages and add them to requirements.txt,
+you'll need to run the init_python task.
