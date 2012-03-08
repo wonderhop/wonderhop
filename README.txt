@@ -19,10 +19,11 @@ Getting Started
     
         (env)$ pip install --requirement=dependencies/requirements.txt
     
--   syncdb to set up Django models
+-   syncdb to set up Django models and migrte
     
         (env)$ cd wonderhop/
         (env)$ python manage.py syncdb
+	(env)$ python manage.py migrate
     
 -   migrate to apply South migrations
     
