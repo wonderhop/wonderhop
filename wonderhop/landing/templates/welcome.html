@@ -22,8 +22,8 @@ $(function(){
         $.colorbox({
             inline: true,
             href: "#modal",
-            width: "544px",
-            height: "255px",
+            width: "580px",
+            height: "520px",
             transition: "none",
             opacity: ".5",
             open: true,
@@ -185,12 +185,20 @@ $(function(){
 
 <div style="display:none">
     <div id="modal">
-        <h2><strong>Be the first to get WonderHop access. And get cash rewards!</strong></h2>
-        <p>
-            <strong>All new member openings are currently reserved.</strong>
-            But you can skip the line by inviting your friends to join WonderHop. Plus, earn amazing <em>cash rewards!</em>
-        </p>
-        <input type="button" class="btn-pink close" value="Invite Friends, Get Cash Rewards" />
+        <h2><strong>Congrats, you are now on our waiting list!</strong></h2>
+        <p>We can't wait to launch out first sales in a few weeks, but spots for launch are <i>very limited</i>.</p>
+        <p><strong>Want to be first to shop our sales of gorgeous and unique products to inspire your home, kitchen, and family?</strong></p>
+        <p>Skip the line, plus earn amazing cash rewards, just by inviting a few of your friends to join WonderHop with you!</p>
+        <input type="button" class="btn-pink close" value="Invite Friends, Earn Cash Rewards" />
+        <div class="features">
+            <p><i>Here's a glimpse of some of our gorgeous finds:</i></p>
+            <div class="feature-images">
+                <img src="{{ STATIC_URL }}landing/products/product1.png"/>
+                <img src="{{ STATIC_URL }}landing/products/product2.png"/>
+                <img src="{{ STATIC_URL }}landing/products/product3.png"/>
+                <br class="clear"/>
+            </div>
+        </div>
     </div>
 </div>
 
