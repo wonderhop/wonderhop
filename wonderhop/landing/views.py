@@ -173,6 +173,9 @@ def privacy(request):
 def jobs(request):
     return render(request, "coming_soon.html")
 
+def wreath(request):
+    return render(request, "launchrock.html")
+
 def refer(request, referral_key):
     request.session["referral_key"] = referral_key
     return redirect(home)
