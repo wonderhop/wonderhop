@@ -84,11 +84,10 @@ def copy_config_files():
         "local_settings.py.template": (env.proj_root + "/local_settings.py", 0644, False),
         "apache.conf": ("/etc/apache2/sites-available/wonderhop", 0644, True),
         "django.wsgi": (env.django_wsgi_root + "/wonderhop.wsgi", 0644, False),
+        "update.sh": ("/home/wonderhop/", 0700, False),
     }
     for src, (dst, mode, use_sudo) in deps.iteritems():
-        upload_template(_dep(src), dst, env, use_sudo=use_sudo)
-        sudo("chmod {0:o} {1}".format(mode, dst))
-        sudo("rm -rf {0}.bak".format(dst))
+        upload_template(_dep(src), dst, env, use_sudo=use_sudo, mode=mode, backup=False)
 
     sudo("a2ensite wonderhop")
 
