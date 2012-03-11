@@ -45,8 +45,9 @@ def signup_post_save_handler(sender, **kwargs):
                     new_reward = new_rewards[0]
             
             params = {
-                "referral_link": signup.referral_url(),
+                "referral_link": signup.referring_user.referral_url(),
                 "new_reward": new_reward,
+                "new_user_email": signup.email,
             }
             m = EmailMultiAlternatives(
                 subject="Someone you invited signed up for WonderHop",
