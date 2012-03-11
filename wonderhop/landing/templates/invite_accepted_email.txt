@@ -1,9 +1,27 @@
-Congratulations, someone you invited to WonderHop signed up!
+{% if new_reward %}
+Big news! You just earned $30 to spend on WonderHop.
 
-{% if new_reward %}You've earned ${{ new_reward.reward }} for signing up {{ new_reward.num_signups }} users. Way to go!
+Your friend michaelsegal72@gmail.com just joined WonderHop.
 
-{% endif %}Remember you can keep inviting friends to share more rewards. Just send them this link:
+That means you've officially earned ${{ new_reward.reward }}
+of WonderHop credit. Congratulations!
 
-{{ referral_link }}
+Keep sharing your unique invite link to get even more rewards:
+         {{ referral_link }}
 
-Thanks from your friends at WonderHop.
+You can also click below to check your up-to-date Rewards Summary.
+
+{% else %}
+
+michaelsegal72@gmail.com owes you a big thank you today!
+You just helped them get access to WonderHop.
+
+You're getting closer to earning $30 of cash to spend on WonderHop!
+Keep sharing your unique invite link to unlock the reward:
+         {{ referral_link }}
+
+You can also click below to check your up-to-date Rewards Summary.
+
+{% endif %} 
+
+www.wonderhop.com/login
