@@ -209,7 +209,7 @@ body#wel-c {}
 .welbox-contant h5{font-size:24px; color:#77CAD9; font-family:"Georgia", Times New Roman, Times, serif; float:left; font-weight:bold;}
 .welbox-contant .link-blue{float:right; margin:10px 0 0; text-decoration:underline; font-weight:bold;}
 .welbox-contant .link-blue{ text-decoration:underline;}
-.welbox-contant .inp-fld{width:178px; padding:6px 10px; margin:15px 0 0;}
+.welbox-contant .inp-fld{width:178px; padding:6px 10px; margin:15px 0 0; font-size:100%; }
 .welbox-contant .btn-pink{width:200px; background:#EF3D61 url(../img/icons01.png) no-repeat 180px 10px; padding:3px 0 5px 10px; font-style:italic; margin:15px 0 0; text-align:left; height:26px; float:left;}
 .welbox-contant .btn-pink:hover{background:#AC0F2F url(../img/icons01.png) no-repeat 180px 10px;}
 .f-tip{position:absolute; left:190px; bottom:35px; font-size:12px; color:#77CAD9; background:#fff; padding:2px 8px; font-weight:bold;}
