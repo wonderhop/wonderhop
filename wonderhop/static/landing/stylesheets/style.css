@@ -396,12 +396,12 @@ body#wel-c {}
 	}
 #modal .btn-pink {
 	width: auto;
-	height: 40px;
+	height: 50px;
 	float: none;
-	margin: 5px auto 20px !important;
-	padding: 0 15px;
+	margin: 8px auto 27px !important;
+	padding: 0 115px;
 	background-image: none;
-	font-size: 15px;
+	font-size: 19px;
     font-family: BodoniBERegular;
 	-moz-box-shadow: 3px 3px 4px #555;
 	-webkit-box-shadow: 3px 3px 4px #555;
