@@ -372,7 +372,7 @@ body#wel-c {}
 
 #modal {
 	/*	height: 230px; */
-	padding: 24px;
+	padding: 37px 30px 0 30px;
 	background: #fff;
 	position: relative;
 	text-align: center;
@@ -383,11 +383,11 @@ body#wel-c {}
 	line-height: 36px;
 	text-shadow: #f4f5f4 2px 2px 2px;
 	font-weight: 100;
-	width: 525px;
+	width: 570px;
 	margin-bottom: 20px;
 	}
 #modal p {
-	margin: 10px auto 15px;
+	margin: 0 auto 15px;
 	font-size: 14px;
 	line-height: 24px;
 	color: #585858;
@@ -398,12 +398,11 @@ body#wel-c {}
 	width: auto;
 	height: 40px;
 	float: none;
-	margin: 0 auto 10px !important;
-	padding: 0 10px;
+	margin: 5px auto 20px !important;
+	padding: 0 15px;
 	background-image: none;
-	font-style: normal;
-	font-weight: bold;
 	font-size: 15px;
+    font-family: BodoniBERegular;
 	-moz-box-shadow: 3px 3px 4px #555;
 	-webkit-box-shadow: 3px 3px 4px #555;
 	box-shadow: 3px 3px 4px #555;
@@ -412,15 +411,18 @@ body#wel-c {}
 	text-align: center;
 	}
 #modal .feature-images {
-	width: 420px;
+	width: 400px;
 	margin: 0 auto;
 	}
 #modal .features img {
 	float: left;
-	margin: 0 10px;
-	width: 120px;
-	height: 120px;
+	margin: 0 13px 26px;
+	width: 174px;
+	height: 174px;
 	}	
+#modal .features img.bottom-image {
+    margin-bottom: 0;
+    }
 	
 /*-----------------------------------------------------------------------------------*/
 /* Full Background CSS
