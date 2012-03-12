@@ -411,15 +411,18 @@ body#wel-c {}
 	text-align: center;
 	}
 #modal .feature-images {
-	width: 400px;
+	width: 574px;
 	margin: 0 auto;
 	}
 #modal .features img {
 	float: left;
-	margin: 0 13px 26px;
-	width: 174px;
-	height: 174px;
+	margin: 0 24px 24px 0;
+	width: 275px;
+	height: 275px;
 	}	
+#modal .features img.last-image {
+    margin-right: 0;
+    }
 #modal .features img.bottom-image {
     margin-bottom: 0;
     }
