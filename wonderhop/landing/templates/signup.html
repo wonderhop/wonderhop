@@ -26,6 +26,15 @@ d.write('<sc'+'ript src="'+
 </script>
 <!-- End of Google Website Optimizer Tracking Script -->
 {% endblock %}
+{% block mixppanelevents %}
+<script>
+var on_button_click = function() {
+    // This sends Mixpanel the User ID
+    mpq.identify("'" + $('#signup_email').val() + "'"); 
+};
+$("#signup_button").click(on_button_click);
+</script>
+{% endblock %}
 {% block extrahead %}
 <script>
 $(function(){
@@ -58,10 +67,10 @@ $(function(){
                 <form method="POST">
                 {% csrf_token %}
                 <a href="{% url wonderhop.landing.views.login %}" class="link-blue">LOGIN</a>
-                <input name="email" type="email" autofocus class="inp-fld" placeholder="Email address" />
+                <input id="signup_email" name="email" type="email" autofocus class="inp-fld" placeholder="Email address" />
                 <input type="hidden" name="backstretch_url">
                 <p id="error">{{ error }}</p>
-                <input type="submit" value="Apply for membership" class="btn-pink" />
+                <input id="signup_button" type="submit" value="Apply for membership" class="btn-pink" />
                 </form>
             </div>
             <!--Right side part End-->
