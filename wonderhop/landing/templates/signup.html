@@ -30,7 +30,7 @@ d.write('<sc'+'ript src="'+
 <script>
 var on_button_click = function() {
     // This sends Mixpanel the User ID
-    mpq.identify("'" + $('#signup_email').val() + "'"); 
+    mpq.identify($('#signup_email').val()); 
 };
 $("#signup_button").click(on_button_click);
 </script>
