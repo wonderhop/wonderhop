@@ -100,8 +100,8 @@ h2 {
 /* Homepage
 /*-----------------------------------------------------------------------------------*/
 #header .wonder{float:left; padding:15px 0 0 20px;}
-.m-id{float:right; background:url(../img/icons01.png) no-repeat right -20px; padding:9px 34px 9px 0; font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:11px; color:#585858; margin:15px 20px 0 0;}
-.m-id:hover{color:#000; background:url(../img/icons01.png) no-repeat right -55px;}
+.m-id{float:right; /*background:url(../img/icons01.png)*/ no-repeat right -20px; padding:9px 34px 9px 0; font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:11px; color:#585858; margin:15px 20px 0 0;}
+.m-id:hover{color:#000; /*background:url(../img/icons01.png)*/ no-repeat right -55px;}
 
 /*-----------------------------------------------------------------------------------*/
 /* Navigation
