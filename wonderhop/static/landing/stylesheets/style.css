@@ -204,7 +204,7 @@ body#wel-c {}
 .welbox-contant.left{background:url(../img/divider.jpg) repeat-y right 0; width:225px; padding:0 25px 0 50px;}
 .welbox-contant h4,.welbox-contant h5,.welbox-contant h6,.welbox-contant p{float:left;}
 .welbox-contant h4{font-size:23px; color:#ed3763;  font-family:"Georgia", Times New Roman, Times, serif;}
-.welbox-contant p{font-size:15px; color:#a2a2a2; font-family:Arial, Helvetica, sans-serif; width:100%; margin:5px 0 0; line-height:20px;}
+.welbox-contant p{font-size:14px; color:#a2a2a2; font-family:Arial, Helvetica, sans-serif; width:100%; margin:5px 0 0; line-height:20px;}
 .welbox-contant h6{font-size:17px; color:#77CAD9; font-family:"Georgia", Times New Roman, Times, serif; font-style:italic; width:100%; margin:10px 0 0;}
 .welbox-contant h5{font-size:24px; color:#77CAD9; font-family:"Georgia", Times New Roman, Times, serif; float:left; font-weight:bold;}
 .welbox-contant .link-blue{float:right; margin:10px 0 0; text-decoration:underline; font-weight:bold;}
