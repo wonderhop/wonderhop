@@ -26,15 +26,6 @@ d.write('<sc'+'ript src="'+
 </script>
 <!-- End of Google Website Optimizer Tracking Script -->
 {% endblock %}
-{% block mixppanelevents %}
-<script>
-var on_button_click = function() {
-    // This sends Mixpanel the User ID
-    mpq.identify($('#signup_email').val()); 
-};
-$("#signup_button").click(on_button_click);
-</script>
-{% endblock %}
 {% block extrahead %}
 <script>
 $(function(){
@@ -42,6 +33,13 @@ $(function(){
     $.backstretch(backstretch_url);
     $("input[name=backstretch_url]").val(backstretch_url);
 });
+</script>
+<script>
+var on_button_click = function() {
+    // This sends Mixpanel the User ID
+    mpq.identify($('#signup_email').val()); 
+};
+$("#signup_button").click(on_button_click);
 </script>
 {% endblock %}
 {% block bodyid %}wel-c{% endblock %}
