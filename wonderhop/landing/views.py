@@ -60,7 +60,7 @@ def home(request):
                     else:
                         break
                 
-            return redirect(welcome, signup.id)
+            return redirect(expl, signup.id)
         except ValidationError as v:
             context["error"] = "Invalid email address"
     
@@ -83,6 +83,11 @@ def login(request):
     
     return render(request, "login.html", context)
 
+def expl(request, signup_id):
+    context = {}
+    context["signup_id"] = signup_id
+    return render(request, "explanation.html", {'signup_id': signup_id})
+    
 def welcome(request, signup_id):
     signup = get_object_or_404(Signup, id=signup_id)
     REFERRAL_LINK_TEXT = "Join me on WonderHop for up to 60% off unique decor, kitchen treats, and family finds to make life one-of-a-kind."

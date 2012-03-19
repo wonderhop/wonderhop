@@ -1,0 +1,103 @@
+{% extends "landing.html" %}
+{% block starthead %}
+<!-- Google Website Optimizer Tracking Script -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['gwo._setAccount', 'UA-29171134-2']);
+  _gaq.push(['gwo._trackPageview', '/2779185752/goal']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<!-- End of Google Website Optimizer Tracking Script -->
+{% endblock %}
+{% block extrahead %}
+<link rel="stylesheet" href="{{ STATIC_URL }}landing/colorbox/colorbox.css" />
+<script src="{{ STATIC_URL }}landing/colorbox/jquery.colorbox.js"></script>
+<script>
+$(document).ready(function(){
+    
+    $(".open").click(function() {
+        $.colorbox({
+            inline: true,
+            href: "#modal",
+            width: "580px",
+            height: "520px",
+            transition: "none",
+            opacity: ".5",
+            open: true,
+        });
+    });
+    
+    $("#modal .close").click(function(){
+        $.colorbox.close();
+    });
+});
+</script>
+{% endblock %}
+{% block content %}
+<div id="wrapper">
+    <div id="header">
+        <a href="{% url wonderhop.landing.views.home %}" class="wonder"><img src="{{ STATIC_URL }}landing/img/wonder-hop.png" alt="" /></a>
+        <a href="javascript:void(0);" class="m-id">{{ signup.email }}</a>
+    </div>
+
+    <div id="main-nav">
+        <div class="mnav">
+            <!--
+            <div class="left-mnav">
+                <a href="javascript:void(0);">SALES</a>
+                <a href="javascript:void(0);">PROJECTS</a>
+                <a href="javascript:void(0);">FAVORITES</a>
+            </div>
+            <ul class="right-mnav">
+                <li><a href="javascript:void(0);">about</a></li>
+                <li><a href="javascript:void(0);">contact</a></li>
+                <li><a href="javascript:void(0);">blog</a></li>
+                <li><a href="javascript:void(0);">job</a></li>
+                <li><a href="javascript:void(0);">feedback</a></li>
+            </ul>
+            -->
+        </div>
+    </div>
+    
+    <h2 id="message">Get inspired with delightful, one-of-a-kind designs</h2>
+    <p>WonderHop is the boutique shop of your dreams.  We feature daily sales of beautiful, one-of-a-kind designs to inspire your home, style and family.  All at up to 60% off retail!</p>
+    <p class="options_preface"><strong>Our first sales launch in a few weeks.  Before then, you can:</strong></p>
+    <div class="form-panel-box">
+        <div class="form-panel left">
+            <h3>1) Earn up to $90 to spend on WonderHop.</h3>
+            <p>All you have to do is invite friends who you think will love our one-of-a-kind finds</p>
+            <a href="/welcome/{{ signup_id }}">
+                <input class="btn-pink" type="submit" value="Earn Rewards" />
+            </a>
+        </div>
+        <div class="form-panel">
+            <h3>2) Get a sneak peek of our unique style.</h3>
+            <p>Check out our LookBook for some of the gorgeous finds we'll be featuring.</p>
+            <input type="button" class="btn-pink open" value="See Our Finds" />
+        </div><!--End form-panel-->
+    
+        <div class="clear"></div>
+    </div><!-- End form-panel-box -->
+    <div class="clear"></div>
+</div>
+
+<div style="display:none">
+    <div id="modal">
+        <h2><strong>Here is a sneek peek of our upcoming sales</strong></h2>
+        <a href="">X</a>
+        <div class="features">
+            <div class="feature-images">
+                <img src="{{ STATIC_URL }}landing/products/product3.png"/>
+                <input type="button" class="btn-pink" value="Add to WishList" />
+                <br class="clear"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Header End-->
+{% endblock %}
