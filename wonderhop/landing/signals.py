@@ -45,6 +45,7 @@ def signup_post_save_handler(sender, **kwargs):
                     new_reward = new_rewards[0]
             
             did_invite = signup.referring_user.sent_invites_set.filter(recipient=signup.email).count() > 0
+            logging.info("did invite for {0} to {1} is {2}".format(signup.referring_user.email, signup.email, did_invite))
             
             params = {
                 "referral_link": signup.referring_user.referral_url(),
