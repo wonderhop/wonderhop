@@ -1,7 +1,7 @@
 {% if new_reward %}
 Big news! You just earned $30 to spend on WonderHop.
 
-Your friend {{ new_user_email }} just joined WonderHop.
+Your friend {{ new_user_email_if_invited }} just joined WonderHop.
 
 That means you've officially earned ${{ new_reward.reward }}
 of WonderHop credit. Congratulations!
