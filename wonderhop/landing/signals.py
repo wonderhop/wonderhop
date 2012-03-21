@@ -44,10 +44,13 @@ def signup_post_save_handler(sender, **kwargs):
                     # There should only be one, presumably
                     new_reward = new_rewards[0]
             
+            did_invite = signup.referring_user.sent_invites_set.filter(recipient=signup.email).count() > 0
+            
             params = {
                 "referral_link": signup.referring_user.referral_url(),
                 "new_reward": new_reward,
                 "new_user_email": signup.email,
+                "new_user_email_if_invited": signup.email if did_invite else None,
             }
             m = EmailMultiAlternatives(
                 subject="Someone you invited signed up for WonderHop",
