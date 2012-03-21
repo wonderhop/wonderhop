@@ -13,7 +13,7 @@ You can also click below to check your up-to-date Rewards Summary.
 
 {% else %}
 
-{{ new_user_email }}  owes you a big thank you today!
+{{ new_user_email_if_invited }}  owes you a big thank you today!
 You just helped them get access to WonderHop.
 
 You're getting closer to earning $30 of cash to spend on WonderHop!
