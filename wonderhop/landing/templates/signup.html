@@ -34,13 +34,6 @@ $(function(){
     $("input[name=backstretch_url]").val(backstretch_url);
 });
 </script>
-<script>
-var on_button_click = function() {
-    // This sends Mixpanel the User ID
-    mpq.identify($('#signup_email').val()); 
-};
-$("#signup_button").click(on_button_click);
-</script>
 {% endblock %}
 {% block bodyid %}wel-c{% endblock %}
 {% block content %}

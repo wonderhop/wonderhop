@@ -63,6 +63,8 @@ $(function(){
         e.preventDefault();
     });
     
+    mpq.identify('{{ signup.email|escapejs }}');
+    
     var percent_filled = {{ signup.referred_user_set.count }} / {{ max_reward_tier_signups }};
     
     var canvas = $("#progress_canvas")[0];
