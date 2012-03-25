@@ -1,0 +1,139 @@
+{% extends "landing.html" %}
+{% block starthead %}
+<!-- Google Website Optimizer Tracking Script -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['gwo._setAccount', 'UA-29171134-2']);
+  _gaq.push(['gwo._trackPageview', '/2779185752/goal']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<!-- End of Google Website Optimizer Tracking Script -->
+{% endblock %}
+{% block extrahead %}
+<link rel="stylesheet" href="{{ STATIC_URL }}landing/colorbox/colorbox.css" />
+<script src="{{ STATIC_URL }}landing/colorbox/jquery.colorbox.js"></script>
+<script>
+$(function(){
+	
+    $("#modal .close").click(function(){
+        $.colorbox.close();
+    });
+
+    $("#see-finds").click(function(e){
+    	$.colorbox({
+            inline: true,
+            href: "#modal",
+            width: "600px",
+            height: "530px",
+            transition: "none",
+            opacity: ".5",
+            open: true,
+            top: "40px",
+        });
+    });
+
+    $("#earn-rewards").click(function(e){
+    	window.location.replace("{% url wonderhop.landing.views.welcome id%}");
+    });
+
+    var counter = 0;
+    var images = ['https://s3.amazonaws.com/wonderhop_products/set1_dwell_yellow_chair_cropped.jpg', 'https://s3.amazonaws.com/wonderhop_products/set1_regasny_cropped.jpg', 'https://s3.amazonaws.com/wonderhop_products/set1_rosanna_decor_from_layla_grace+cropped.jpg', 'https://s3.amazonaws.com/wonderhop_products/set1_sienna_earrings.jpeg'];
+    $("#my_image").attr("src", images[0]);
+    
+    $("#next").click(function(e) {
+        counter ++;
+        if ( counter == 4)
+            counter = 0;
+        $("#my_image").attr("src", images[counter]);
+    });
+
+    $("#previous").click(function(e) {
+        counter --;
+        if ( counter == -1)
+            counter = 3;
+        $("#my_image").attr("src", images[counter]);
+    });
+});
+</script>
+{% endblock %}
+{% block content %}
+<div id="wrapper">
+    <div id="header">
+        <a href="{% url wonderhop.landing.views.home %}" class="wonder"><img src="{{ STATIC_URL }}landing/img/wonder-hop.png" alt="" /></a>
+        <a href="javascript:void(0);" class="m-id">{{ signup.email }}</a>
+    </div>
+
+	<div class="explanation">
+	    <div id="main-nav">
+	        <div class="mnav">
+	            <!--
+	            <div class="left-mnav">
+	                <a href="javascript:void(0);">SALES</a>
+	                <a href="javascript:void(0);">PROJECTS</a>
+	                <a href="javascript:void(0);">FAVORITES</a>
+	            </div>
+	            <ul class="right-mnav">
+	                <li><a href="javascript:void(0);">about</a></li>
+	                <li><a href="javascript:void(0);">contact</a></li>
+	                <li><a href="javascript:void(0);">blog</a></li>
+	                <li><a href="javascript:void(0);">job</a></li>
+	                <li><a href="javascript:void(0);">feedback</a></li>
+	            </ul>
+	            -->
+	        </div>
+	    </div>
+	    
+	    <h2 id="message">Get inspired with delightful, one-of-a-kind designs.</h2>
+	    <p id="descrip_message">Wonderhop is the boutique shop of your dreams. We feature daily sales of beautiful, one-of-a-kind designs to inspire your home, style and family. All at up to 60% off retail!</p>
+	    <br/>
+	    <p id="notice_message">Our first sales launch in a few weeks. Before then, you can:</p>
+	    <div class="form-panel-box">
+	        <div class="form-panel left">
+	            <h3 class="number">1)</h3> 
+	            <h3 class="text">Earn up to $90 to spend on Wonderhop.</h3>
+	            <p>All you have to do is invite friends who you think will love our one-of-a-kind friends.</p>
+	            <div class="center_button">
+	        		<input id="earn-rewards" type="button" class="btn-center" value="Earn Rewards">
+	        	</div>
+	        </div>
+	        <div class="form-panel">
+	            <h3 class="number">2)</h3> 
+	            <h3 class="text">Get a sneak peek of our unique style.</h3>
+	            <p>Check out our LookBook for some of the gorgeous finds we'll be featuring.</p>
+	            <div class="center_button">
+	        		<input id="see-finds" type="button" class="btn-center" value="See Our Finds">
+	        	</div>
+	        </div><!--End form-panel-->
+	    
+	        <div class="clear"></div>
+	        
+	    </div><!-- End form-panel-box -->
+	    <div class="clear"></div>
+	 </div>
+</div>
+
+<div style="display:none">
+    <div id="modal">
+        <div class="features">
+            <p><i>Here's a sneak peak finds we'll feature:</i></p>
+            <br/>
+            <div class="feature-nav">
+	            <div class="feature_back">
+	            	<input id="previous" type="button" class="btn-nav" value="">
+	            </div>
+	            <div class="feature-images">
+	                <img id="my_image"/>
+	                <br class="clear"/>
+	            </div>
+	            <div class="feature_forward">
+	            	<input id="next" type="button" class="btn-nav" value="">
+	            </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
