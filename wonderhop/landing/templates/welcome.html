@@ -18,24 +18,6 @@
 <script src="{{ STATIC_URL }}landing/colorbox/jquery.colorbox.js"></script>
 <script>
 $(function(){
-    if ($.cookies.get("modal_done") !== true) {
-        $.colorbox({
-            inline: true,
-            href: "#modal",
-            width: "630px",
-            height: "1006px",
-            transition: "none",
-            opacity: ".5",
-            open: true,
-            top: "24px",
-        });
-    }
-    
-    $("#modal .close").click(function(){
-        $.colorbox.close();
-        $.cookies.set("modal_done", true);
-    });
-
     $(".lnk-t").click(function(e){
         var width  = 575,
         height = 220,
@@ -154,7 +136,7 @@ $(function(){
             <h3>Invite friends by email</h3>
             <p>Let’s find your friends!</p>
             <div class="btn-snet">
-                <a class="cs_import" href="javascript:void(0);">Import from Address Book</a>
+                <a class="cs_import" href="javascript:void();">Import from Address Book</a>
             </div>
             <!-- A hidden form for contact importer -->
             <form method="POST" id="hidden_email_form" action="{% url wonderhop.landing.views.share_email signup.id %}">
@@ -184,26 +166,6 @@ $(function(){
         </div><!-- End email -->
     </div><!-- End form-panel-box -->
     <div class="clear"></div>
-</div>
-
-<div style="display:none">
-    <div id="modal">
-        <h2><strong>Congrats, you are now on our waiting list!</strong></h2>
-        <p>We launch our first sales in a few weeks, but spots for launch are <i>very limited</i>.</p>
-        <p><strong>Want to be first to shop our sales of gorgeous and unique products to inspire your home, kitchen, and family?</strong></p>
-        <p>You can skip the line, and earn <b>amazing cash rewards</b>, just by inviting a few of your friends to join WonderHop with you!</p>
-        <input type="button" class="btn-pink close" value="Invite Friends, Earn Cash Rewards" />
-        <div class="features">
-            <p><i>Here are some of the gorgeous finds we'll feature:</i></p>
-            <div class="feature-images">
-                <img src="https://s3.amazonaws.com/wonderhop_products/set1_dwell_yellow_chair_cropped.jpg"/>
-                <img class="last-image" src="https://s3.amazonaws.com/wonderhop_products/set1_regasny_cropped.jpg"/>
-                <img class="bottom-image" src="https://s3.amazonaws.com/wonderhop_products/set1_rosanna_decor_from_layla_grace+cropped.jpg"/>
-                <img class="last-image bottom-image" src="https://s3.amazonaws.com/wonderhop_products/set1_sienna_earrings.jpeg"/>
-                <br class="clear"/>
-            </div>
-        </div>
-    </div>
 </div>
 
 <script type="text/javascript" src="https://api.cloudsponge.com/address_books.js"></script>
