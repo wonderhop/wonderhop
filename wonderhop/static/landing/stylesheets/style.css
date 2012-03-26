@@ -73,7 +73,7 @@ table{border-spacing:0;}
 	}
 
 #message {
-	min-height: 65px;
+	min-height: 50px;
 	clear: both;
 	padding: 30px 0 0 30px;
 	}
@@ -250,19 +250,20 @@ body#wel-c {}
 	}
 
 .explanation #descrip_message {
-	font-size:17px; 
+	font-size:16px; 
 	color:#585858; 
 	margin: 0 174px 0 30px;
 	line-height: 24px;
 	}
 	
 .explanation #notice_message {
-	font-size:17px; 
-	color:#0B0604; 
+	font-size:18px; 
+	color:#424242; 
 	margin: 0 174px 0 30px;
 	line-height: 24px;
 	text-align:center;
 	padding-top:12px;
+	font-weight:bold;
 	}
 	
 .explanation .form-panel-box p {
@@ -345,13 +346,13 @@ body#wel-c {}
 	}
 .form-panel p {
 	border-top: none;
-	font-size: 16px;
+	font-size: 15px;
 	color: #585858;
-	margin: 20px 0;
+	margin: 12px 0;
 	padding: 0;
 	text-align: left;
 	width: 350px;
-	line-height: 24px;
+	line-height: 22px;
 }
 .email p {
 	border-top: none;
@@ -448,7 +449,7 @@ body#wel-c {}
 	font-size: 14px;
 	line-height: 24px;
 	color: #585858;
-	width: 500px;
+	width: 535px;
 	text-align: left;
 	}
 #modal .features p {
@@ -487,7 +488,7 @@ body#wel-c {}
 	}
 .feature-nav{
 	float:left;
-	margin:0 20px;
+	margin:0 20px 0 25px;
 	}
 /*-----------------------------------------------------------------------------------*/
 /* Full Background CSS
