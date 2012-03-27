@@ -28,7 +28,7 @@ $(function(){
             inline: true,
             href: "#modal",
             width: "600px",
-            height: "530px",
+            height: "570px",
             transition: "none",
             opacity: ".5",
             open: true,
@@ -37,18 +37,21 @@ $(function(){
     });
 
     $("#earn-rewards").click(function(e){
-    	window.location.replace("{% url wonderhop.landing.views.welcome id%}");
+    	window.location = "{% url wonderhop.landing.views.welcome signup.id%}";
     });
 
     var counter = 0;
     var images = ['https://s3.amazonaws.com/wonderhop_products/set1_dwell_yellow_chair_cropped.jpg', 'https://s3.amazonaws.com/wonderhop_products/set1_regasny_cropped.jpg', 'https://s3.amazonaws.com/wonderhop_products/set1_rosanna_decor_from_layla_grace+cropped.jpg', 'https://s3.amazonaws.com/wonderhop_products/set1_sienna_earrings.jpeg'];
+    var captions = ['Thrilling Furniture Designs from Dwell Studios', 'Unforgettable Stationary from Rifle Paper Co', 'California Bohemian Jewelry from TenThings', 'Cherished Kitchen Traditions from Rosanna']
     $("#my_image").attr("src", images[0]);
+    $("#caption").html(captions[counter]);
     
     $("#next").click(function(e) {
         counter ++;
         if ( counter == 4)
             counter = 0;
         $("#my_image").attr("src", images[counter]);
+        $("#caption").html(captions[counter]);
     });
 
     $("#previous").click(function(e) {
@@ -56,6 +59,15 @@ $(function(){
         if ( counter == -1)
             counter = 3;
         $("#my_image").attr("src", images[counter]);
+        $("#caption").html(captions[counter]);
+    });
+
+    $("#add-wishlist").click(function(e) {
+        alert("Added to wishlist ");
+    });
+
+    $("#close-dialog").click(function(e) {
+    	$.colorbox.close();
     });
 });
 </script>
@@ -118,8 +130,12 @@ $(function(){
 
 <div style="display:none">
     <div id="modal">
+    	<div class="close-modal">
+    		<p></p>
+    		<input id="close-dialog" type="button" class="btn-close" value="">
+    	</div>
         <div class="features">
-            <p><i>Here's a sneak peak finds we'll feature:</i></p>
+            <p id="caption"><i>Thrilling Furniture Designs from Dwell Studios</i></p>
             <br/>
             <div class="feature-nav">
 	            <div class="feature_back">
@@ -127,6 +143,8 @@ $(function(){
 	            </div>
 	            <div class="feature-images">
 	                <img id="my_image"/>
+	                <br class="clear"/>
+	                <input id="add-wishlist" type="button" class="btn-wishlist" value="Add to wishlist">
 	                <br class="clear"/>
 	            </div>
 	            <div class="feature_forward">
