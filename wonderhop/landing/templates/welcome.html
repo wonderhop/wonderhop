@@ -94,8 +94,8 @@ $(function(){
         </div>
     </div>
     
-    <h2 id="message">Be the first to get WonderHop access. And get cash rewards!</h2>
-    
+    <h2 id="message">Earn up to $90 to spend on WonderHop.</h2>
+    <p id="one-liner"><strong>Do your friends also love inspiring finds?</strong> Share WonderHop using our tools below and earn cash to spend when we launch.</p>    
     <div class="form-panel-box">
         <div class="form-panel left">
             <div id="progress">
@@ -104,12 +104,12 @@ $(function(){
             <span class="counter_label">friends joined</span>
             </div>
             <ul class="left">
-                {% if reward_tiers.0 %}<li><em>{{ reward_tiers.0.num_signups }} friends join</em>Wonderhop access</li>{% endif %}
                 {% if reward_tiers.1 %}<li><em>{{ reward_tiers.1.num_signups }} friends join</em> <strong>${{ reward_tiers.1.reward }}</strong> Wonderhop credit</li>{% endif %}
+                {% if reward_tiers.1 %}<li><em>{{ reward_tiers.2.num_signups }} friends join</em> <strong>${{ reward_tiers.2.reward }}</strong> more credit</li>{% endif %}
             </ul>
             <ul>
-                {% if reward_tiers.2 %}<li><em>{{ reward_tiers.2.num_signups }} friends join</em> <strong>${{ reward_tiers.2.reward }}</strong> more credit</li>{% endif %}
-                {% if reward_tiers.3 %}<li><em>{{ reward_tiers.3.num_signups }} friends join</em> <strong>${{ reward_tiers.3.reward }}</strong> more credit</li>{% endif %}
+                {% if reward_tiers.2 %}<li><em>{{ reward_tiers.3.num_signups }} friends join</em> <strong>${{ reward_tiers.3.reward }}</strong> more credit</li>{% endif %}
+                {% if reward_tiers.3 %}<li><em>{{ reward_tiers.4.num_signups }} friends join</em> <strong>${{ reward_tiers.4.reward }}</strong> more credit</li>{% endif %}
             </ul>
         </div>
         <div class="form-panel">

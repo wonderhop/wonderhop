@@ -73,10 +73,17 @@ table{border-spacing:0;}
 	}
 
 #message {
-	min-height: 50px;
+	min-height: 24px;
 	clear: both;
 	padding: 30px 0 0 30px;
+	width:730px;
 	}
+#one-liner {
+	padding: 10px 0 0 30px;
+	color: #585858;
+	font-size:16px;
+	min-height:24px;
+}
 
 /*-----------------------------------------------------------------------------------*/
 /* Typography
