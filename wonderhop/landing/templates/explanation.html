@@ -18,6 +18,9 @@
 <script src="{{ STATIC_URL }}landing/colorbox/jquery.colorbox.js"></script>
 <script>
 $(function(){
+
+    mpq.identify('{{ signup.email|escapejs }}');
+
 	
     $("#modal .close").click(function(){
         $.colorbox.close();
