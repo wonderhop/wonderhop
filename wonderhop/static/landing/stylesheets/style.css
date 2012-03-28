@@ -488,8 +488,36 @@ body#wel-c {}
 	}
 .feature-nav{
 	float:left;
-	margin:0 20px 0 25px;
+	margin:0 20px 0 20px;
 	}
+
+
+#add-wishlist {
+    background: none repeat scroll 0 0 #EF3D61;
+	color: #FFFFFF;
+	cursor: pointer;
+	float: left;
+	font-family: "Georgia",Times New Roman,Times,serif;
+	font-size: 14px;
+	font-style: italic;
+	height: 40px;
+	line-height: 20px;
+	margin-left: 126px;
+	margin-top: 20px;
+	padding: 10px 35px 9px 22px;
+	text-align: left;
+	width: 132px;
+    }
+#close-dialog {
+	background: url(../img/nav.png) 122px -27px;
+        padding: 0 0 0 0;
+	width: 20px;
+        margin-top: -33px;
+	margin-right: -20px;
+    }
+
+
+
 /*-----------------------------------------------------------------------------------*/
 /* Full Background CSS
 /*-----------------------------------------------------------------------------------*/
