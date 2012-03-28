@@ -18,14 +18,11 @@
 <script src="{{ STATIC_URL }}landing/colorbox/jquery.colorbox.js"></script>
 <script>
 $(function(){
-
     mpq.identify('{{ signup.email|escapejs }}');
-
 	
     $("#modal .close").click(function(){
         $.colorbox.close();
     });
-
     $("#see-finds").click(function(e){
     	$.colorbox({
             inline: true,
@@ -45,7 +42,7 @@ $(function(){
 
     var counter = 0;
     var images = ['https://s3.amazonaws.com/wonderhop_products/set1_dwell_yellow_chair_cropped.jpg', 'https://s3.amazonaws.com/wonderhop_products/set1_regasny_cropped.jpg', 'https://s3.amazonaws.com/wonderhop_products/set1_rosanna_decor_from_layla_grace+cropped.jpg', 'https://s3.amazonaws.com/wonderhop_products/set1_sienna_earrings.jpeg'];
-    var captions = ['Thrilling Furniture Designs from Dwell Studios', 'Unforgettable Stationary from Rifle Paper Co', 'California Bohemian Jewelry from TenThings', 'Cherished Kitchen Traditions from Rosanna'];
+    var captions = ['Thrilling Furniture Designs from Dwell Studios', 'Unforgettable Stationary from Rifle Paper Co', 'Cherished Kitchen Traditions from Rosanna', 'California Bohemian Jewelry from TenThings'];
     $("#my_image").attr("src", images[0]);
     $("#caption").html(captions[counter]);
 

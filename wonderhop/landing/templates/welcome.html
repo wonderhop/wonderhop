@@ -44,8 +44,7 @@ $(function(){
         );
         e.preventDefault();
     });
-    
-    
+        
     var percent_filled = {{ signup.referred_user_set.count }} / {{ max_reward_tier_signups }};
     
     var canvas = $("#progress_canvas")[0];
