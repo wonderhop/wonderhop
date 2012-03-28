@@ -28,7 +28,7 @@ $(function(){
             inline: true,
             href: "#modal",
             width: "600px",
-            height: "570px",
+            height: "600px",
             transition: "none",
             opacity: ".5",
             open: true,
@@ -52,6 +52,8 @@ $(function(){
             counter = 0;
         $("#my_image").attr("src", images[counter]);
 	$("#caption").html(captions[counter]);
+        $("#add-wishlist").css("background-color","#EF3D61");
+        $("#add-wishlist").val("Add to wishlist");	
     });
 
     $("#previous").click(function(e) {
@@ -60,9 +62,13 @@ $(function(){
             counter = 3;
         $("#my_image").attr("src", images[counter]);
 	$("#caption").html(captions[counter]);
+        $("#add-wishlist").css("background-color","#EF3D61");
+        $("#add-wishlist").val("Add to wishlist");	
+
     });
     $("#add-wishlist").click(function(e) {
-      alert("Added to wishlist ");
+      $("#add-wishlist").css("background-color","#424242");
+      $("#add-wishlist").val("Added to wishlist");
     });
     $("#close-dialog").click(function(e) {
       $.colorbox.close();
@@ -134,7 +140,7 @@ $(function(){
       </div>
         <div class="features">
             <p><i>Here's a sneak peak of some of our unique finds:</i></p>
-            <!-- <p id="caption">Thrilling Furniture Designs from Dwell Studios</p>-->
+            <p id="caption" class="caption">Thrilling Furniture Designs from Dwell Studios</p>
 	    <br/>
             <div class="feature-nav">
 	            <div class="feature_back">

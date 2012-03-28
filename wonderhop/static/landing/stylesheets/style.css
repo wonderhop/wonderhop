@@ -456,6 +456,9 @@ body#wel-c {}
 	text-align: center;
 	margin: 4px 0 4px 0;
 	}
+#modal .features p.caption {
+	font-weight:bold;    
+}
 #modal .feature-images {
 	float:left;
 	padding: 0 20px 0 20px;
