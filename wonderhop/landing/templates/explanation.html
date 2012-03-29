@@ -19,7 +19,7 @@
 <script>
 $(function(){
 
-    mpq.identify('{{ signup.email|escapejs }}');
+    mixpanel.identify('{{ signup.email|escapejs }}');
 	
     $("#modal .close").click(function(){
         $.colorbox.close();

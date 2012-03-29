@@ -31,7 +31,7 @@ d.write('<sc'+'ript src="'+
 $(function(){
     var backstretch_url = utmx("variation_content", "backstretch_url") || "{{ STATIC_URL }}landing/img/bg-welcome.jpg";
     $.backstretch(backstretch_url);
-    mpq.register({"backstretch_url": backstretch_url}, "all", 14);
+    mixpanel.register({"backstretch_url": backstretch_url}, "all", 14);
     $("input[name=backstretch_url]").val(backstretch_url);
 });
 </script>
