@@ -55,6 +55,8 @@ $(function(){
     ctx.arc(200, 120, 100, Math.PI, to_angle, false);
     ctx.arc(200, 120, 75, to_angle, Math.PI, true);
     ctx.fill();
+
+    mixpanel.name_tag('{{ signup.email|escapejs }}');
 });
 </script>
 {% endblock %}

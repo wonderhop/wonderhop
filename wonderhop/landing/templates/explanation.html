@@ -95,6 +95,8 @@ $(function(){
     $("#close-dialog").click(function(e) {
       $.colorbox.close();
     });
+    
+    mixpanel.name_tag('{{ signup.email|escapejs }}');
 });
 </script>
 {% endblock %}
