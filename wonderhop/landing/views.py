@@ -87,7 +87,11 @@ def explanation(request, signup_id):
     signup = get_object_or_404(Signup, id=signup_id)
     if signup.email is not None:
         return render(request, "explanation.html", {"signup":signup})
+<<<<<<< HEAD
     
+=======
+        
+>>>>>>> b1a3f0a09cf8872632dcc7e56b5c63d32b62c8f2
 def welcome(request, signup_id):
     signup = get_object_or_404(Signup, id=signup_id)
     REFERRAL_LINK_TEXT = "Join me on WonderHop for up to 60% off unique decor, kitchen treats, and family finds to make life one-of-a-kind."

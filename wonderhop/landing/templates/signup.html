@@ -31,15 +31,9 @@ d.write('<sc'+'ript src="'+
 $(function(){
     var backstretch_url = utmx("variation_content", "backstretch_url") || "{{ STATIC_URL }}landing/img/bg-welcome.jpg";
     $.backstretch(backstretch_url);
+    mixpanel.register({"backstretch_url": backstretch_url}, "all", 14);
     $("input[name=backstretch_url]").val(backstretch_url);
 });
-</script>
-<script>
-var on_button_click = function() {
-    // This sends Mixpanel the User ID
-    mpq.identify($('#signup_email').val()); 
-};
-$("#signup_button").click(on_button_click);
 </script>
 {% endblock %}
 {% block bodyid %}wel-c{% endblock %}

@@ -6,11 +6,10 @@
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}landing/stylesheets/style.css"/>
 <script src="{{ STATIC_URL }}landing/js/jquery-1.6.1.min.js" ></script>
 <script src="{{ STATIC_URL }}landing/js/common.js" ></script>
+<!-- start Mixpanel --><script type="text/javascript">(function(d,c){var a,b,g,e;a=d.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===d.location.protocol?"https:":"http:")+'//api.mixpanel.com/site_media/js/api/mixpanel.2.js';b=d.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b);c._i=[];c.init=function(a,d,f){var b=c;"undefined"!==typeof f?b=c[f]=[]:f="mixpanel";g="disable track track_links track_forms register register_once unregister identify name_tag set_config".split(" ");for(e=0;e<
+g.length;e++)(function(a){b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,0)))}})(g[e]);c._i.push([a,d,f])};window.mixpanel=c})(document,[]);
+mixpanel.init("e8adc5127eb107f869c4f016bb119e2a");</script><!-- end Mixpanel -->
 {% block extrahead %}{% endblock %}
-<!-- start Mixpanel -->
-<script type="text/javascript">var mpq=[];mpq.push(["init","e8adc5127eb107f869c4f016bb119e2a"]);(function(){var b,a,e,d,c;b=document.createElement("script");b.type="text/javascript";b.async=true;b.src=(document.location.protocol==="https:"?"https:":"http:")+"//api.mixpanel.com/site_media/js/api/mixpanel.js";a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(b,a);e=function(f){return function(){mpq.push([f].concat(Array.prototype.slice.call(arguments,0)))}};d=["init","track","track_links","track_forms","register","register_once","identify","name_tag","set_config"];for(c=0;c<d.length;c++){mpq[d[c]]=e(d[c])}})();
-</script>
-<!-- end Mixpanel -->
 </head>
 <body id="{% block bodyid %}{% endblock %}">
 {% block content %}{% endblock %}

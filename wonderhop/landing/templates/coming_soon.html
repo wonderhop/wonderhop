@@ -1,3 +1,30 @@
+{% extends "landing.html" %}
 {% block content %}
-Coming soon!
+<div id="wrapper">
+    <div id="header">
+        <a href="{% url wonderhop.landing.views.home %}" class="wonder"><img src="{{ STATIC_URL }}landing/img/wonder-hop.png" alt="" /></a>
+        <a href="javascript:void(0);" class="m-id">{{ signup.email }}</a>
+    </div>
+
+    <div id="main-nav">
+        <div class="mnav">
+            <!--
+            <div class="left-mnav">
+                <a href="javascript:void(0);">SALES</a>
+                <a href="javascript:void(0);">PROJECTS</a>
+                <a href="javascript:void(0);">FAVORITES</a>
+            </div>
+            <ul class="right-mnav">
+                <li><a href="javascript:void(0);">about</a></li>
+                <li><a href="javascript:void(0);">contact</a></li>
+                <li><a href="javascript:void(0);">blog</a></li>
+                <li><a href="javascript:void(0);">job</a></li>
+                <li><a href="javascript:void(0);">feedback</a></li>
+            </ul>
+            -->
+        </div>
+    </div>
+    <div id="coming-soon"><h2>Coming Soon!</h2></div>
+    
+</div>
 {% endblock %}

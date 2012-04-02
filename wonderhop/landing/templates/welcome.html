@@ -1,16 +1,6 @@
 {% extends "landing.html" %}
 {% block starthead %}
 <!-- Google Website Optimizer Tracking Script -->
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['gwo._setAccount', 'UA-29171134-2']);
-  _gaq.push(['gwo._trackPageview', '/2779185752/goal']);
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
 <!-- End of Google Website Optimizer Tracking Script -->
 {% endblock %}
 {% block extrahead %}
@@ -44,7 +34,7 @@ $(function(){
         );
         e.preventDefault();
     });
-    
+        
     var percent_filled = {{ signup.referred_user_set.count }} / {{ max_reward_tier_signups }};
     
     var canvas = $("#progress_canvas")[0];
@@ -65,6 +55,8 @@ $(function(){
     ctx.arc(200, 120, 100, Math.PI, to_angle, false);
     ctx.arc(200, 120, 75, to_angle, Math.PI, true);
     ctx.fill();
+
+    mixpanel.name_tag('{{ signup.email|escapejs }}');
 });
 </script>
 {% endblock %}
@@ -94,8 +86,8 @@ $(function(){
         </div>
     </div>
     
-    <h2 id="message">Be the first to get WonderHop access. And get cash rewards!</h2>
-    
+    <h2 id="message">Earn up to $90 to spend on WonderHop.</h2>
+    <p id="one-liner"><strong>Do your friends also love inspiring finds?</strong> Share WonderHop using our tools below and earn cash to spend when we launch.</p>    
     <div class="form-panel-box">
         <div class="form-panel left">
             <div id="progress">
@@ -104,12 +96,12 @@ $(function(){
             <span class="counter_label">friends joined</span>
             </div>
             <ul class="left">
-                {% if reward_tiers.0 %}<li><em>{{ reward_tiers.0.num_signups }} friends join</em>Wonderhop access</li>{% endif %}
                 {% if reward_tiers.1 %}<li><em>{{ reward_tiers.1.num_signups }} friends join</em> <strong>${{ reward_tiers.1.reward }}</strong> Wonderhop credit</li>{% endif %}
+                {% if reward_tiers.1 %}<li><em>{{ reward_tiers.2.num_signups }} friends join</em> <strong>${{ reward_tiers.2.reward }}</strong> more credit</li>{% endif %}
             </ul>
             <ul>
-                {% if reward_tiers.2 %}<li><em>{{ reward_tiers.2.num_signups }} friends join</em> <strong>${{ reward_tiers.2.reward }}</strong> more credit</li>{% endif %}
-                {% if reward_tiers.3 %}<li><em>{{ reward_tiers.3.num_signups }} friends join</em> <strong>${{ reward_tiers.3.reward }}</strong> more credit</li>{% endif %}
+                {% if reward_tiers.2 %}<li><em>{{ reward_tiers.3.num_signups }} friends join</em> <strong>${{ reward_tiers.3.reward }}</strong> more credit</li>{% endif %}
+                {% if reward_tiers.3 %}<li><em>{{ reward_tiers.4.num_signups }} friends join</em> <strong>${{ reward_tiers.4.reward }}</strong> more credit</li>{% endif %}
             </ul>
         </div>
         <div class="form-panel">
