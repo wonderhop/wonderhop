@@ -19,7 +19,6 @@
 <script>
 $(function(){
 
-    mixpanel.identify('{{ signup.email|escapejs }}');
 	
     $("#modal .close").click(function(){
         $.colorbox.close();
@@ -98,6 +97,8 @@ $(function(){
     });
     
     mixpanel.name_tag('{{ signup.email|escapejs }}');
+    mixpanel.track("New Signup");
+
 });
 </script>
 {% endblock %}
