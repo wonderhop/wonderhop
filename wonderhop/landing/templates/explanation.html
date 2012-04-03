@@ -19,8 +19,11 @@
 <script>
 $(function(){
 
-	
-    $("#modal .close").click(function(){
+    mixpanel.identify('{{ signup.email|escapejs }}');
+    mixpanel.name_tag('{{ signup.email|escapejs }}');
+    mixpanel.track("New Signup",{ "{{signup.backstretch_url}}"});
+
+$("#modal .close").click(function(){
         $.colorbox.close();
     });
     $("#see-finds").click(function(e){
@@ -95,9 +98,6 @@ $(function(){
     $("#close-dialog").click(function(e) {
       $.colorbox.close();
     });
-    
-    mixpanel.name_tag('{{ signup.email|escapejs }}');
-    mixpanel.track("New Signup");
 
 });
 </script>
