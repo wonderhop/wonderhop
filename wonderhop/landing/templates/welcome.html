@@ -9,7 +9,8 @@
 <script>
 $(function(){
 
-    //mixpanel.name_tag('{{ signup.email|escapejs }}');
+    mixpanel.identify('{{ signup.email|escapejs }}');
+    mixpanel.name_tag('{{ signup.email|escapejs }}');
 
     $(".lnk-t").click(function(e){
         mixpanel.track("Twitter Share Clicked");
