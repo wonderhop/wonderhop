@@ -33,6 +33,7 @@ $(function(){
     $.backstretch(backstretch_url);
     mixpanel.register({"backstretch_url": backstretch_url}, "all", 14);
     $("input[name=backstretch_url]").val(backstretch_url);
+    mixpanel.track_pageview();
 });
 </script>
 {% endblock %}
