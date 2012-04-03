@@ -21,7 +21,7 @@ $(function(){
 
     mixpanel.identify('{{ signup.email|escapejs }}');
     mixpanel.name_tag('{{ signup.email|escapejs }}');
-    mixpanel.track("New Signup",{ "{{signup.backstretch_url}}"});
+    mixpanel.track("New Signup",{ "Landing_image" : "{{signup.backstretch_url}}"});
 
 $("#modal .close").click(function(){
         $.colorbox.close();
