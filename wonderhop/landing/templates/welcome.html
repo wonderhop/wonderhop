@@ -8,7 +8,11 @@
 <script src="{{ STATIC_URL }}landing/colorbox/jquery.colorbox.js"></script>
 <script>
 $(function(){
+
+    //mixpanel.name_tag('{{ signup.email|escapejs }}');
+
     $(".lnk-t").click(function(e){
+        mixpanel.track("Twitter Share Clicked");
         var width  = 575,
         height = 220,
         left   = ($(window).width()  - width)  / 2,
@@ -23,6 +27,7 @@ $(function(){
     });
     
     $(".lnk-f").click(function(e){
+        mixpanel.track("Facebook Share Clicked");
         FB.ui(
           {
             method: 'feed',
@@ -34,7 +39,16 @@ $(function(){
         );
         e.preventDefault();
     });
+
+    $(".btn-invite-manual").click(function(e){
+      mixpanel.track("Invited Emails Manually");
+    });
         
+    $(".cs_import").click(function(e) {
+      mixpanel.track("Address Book Importer Opened");
+    });
+        
+  }
     var percent_filled = {{ signup.referred_user_set.count }} / {{ max_reward_tier_signups }};
     
     var canvas = $("#progress_canvas")[0];
@@ -56,7 +70,6 @@ $(function(){
     ctx.arc(200, 120, 75, to_angle, Math.PI, true);
     ctx.fill();
 
-    mixpanel.name_tag('{{ signup.email|escapejs }}');
 });
 </script>
 {% endblock %}
@@ -97,11 +110,11 @@ $(function(){
             </div>
             <ul class="left">
                 {% if reward_tiers.1 %}<li><em>{{ reward_tiers.1.num_signups }} friends join</em> <strong>${{ reward_tiers.1.reward }}</strong> Wonderhop credit</li>{% endif %}
-                {% if reward_tiers.1 %}<li><em>{{ reward_tiers.2.num_signups }} friends join</em> <strong>${{ reward_tiers.2.reward }}</strong> more credit</li>{% endif %}
+                {% if reward_tiers.2 %}<li><em>{{ reward_tiers.2.num_signups }} friends join</em> <strong>${{ reward_tiers.2.reward }}</strong> more credit</li>{% endif %}
             </ul>
             <ul>
-                {% if reward_tiers.2 %}<li><em>{{ reward_tiers.3.num_signups }} friends join</em> <strong>${{ reward_tiers.3.reward }}</strong> more credit</li>{% endif %}
-                {% if reward_tiers.3 %}<li><em>{{ reward_tiers.4.num_signups }} friends join</em> <strong>${{ reward_tiers.4.reward }}</strong> more credit</li>{% endif %}
+                {% if reward_tiers.3 %}<li><em>{{ reward_tiers.3.num_signups }} friends join</em> <strong>${{ reward_tiers.3.reward }}</strong> more credit</li>{% endif %}
+                {% if reward_tiers.4 %}<li><em>{{ reward_tiers.4.num_signups }} friends join</em> <strong>${{ reward_tiers.4.reward }}</strong> more credit</li>{% endif %}
             </ul>
         </div>
         <div class="form-panel">
@@ -139,7 +152,7 @@ $(function(){
                 <form method="POST" action="{% url wonderhop.landing.views.share_email signup.id %}">
                     {% csrf_token %}
                     <input name="emails" type="text" placeholder="Type emails, separated by commas" class="inp-fld send">
-                    <input type="submit" class="btn-pink" value="Send">
+                    <input type="submit" class="btn-pink btn-invite-manual" value="Send">
                 </form>
                 
                 {% if emailed %}
