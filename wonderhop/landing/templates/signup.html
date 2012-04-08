@@ -50,6 +50,7 @@ $(function(){
                 <h4>Wonderful finds for an inspired home.</h4>
                 <p>Uniquely lovely products to inspire <br />your home, kitchen and family.</p>
                 <h6>All at up to <span class="bold">60%</span> off retail.</h6>
+                <h6>Testing {{ advertisement_id_for_img|escapejs }}</h6>
             </div>
             <!--Left side part End-->
             <!--Right side part Begin-->
@@ -65,7 +66,7 @@ $(function(){
                 </form>
             </div>
             <!--Right side part End-->
-
+<img width="1" height="1" style="" src="https://s3.amazonaws.com/wonderhop_products/{{ advertisement_id_for_img|escapejs }}" alt="" />
         </div>
         <div class="clear"></div>
     </div>
