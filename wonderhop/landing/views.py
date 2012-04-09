@@ -65,7 +65,7 @@ def home(request):
             context["error"] = "Invalid email address"
     
     for track_event in ["advertisement_id", "referral_key"]:
-        context["advertisement_id_for_img"] = request.session["advertisement_id"]
+        #context["advertisement_id_for_img"] = request.session["advertisement_id"]
         tracked_key = "tracked_{0}".format(track_event)
         if track_event in request.session and tracked_key not in request.session:
             context["event_{0}".format(track_event)] = request.session[track_event]
