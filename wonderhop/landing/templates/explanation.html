@@ -20,8 +20,11 @@
 $(function(){
 
     mixpanel.identify('{{ signup.email|escapejs }}');
+    mixpanel.name_tag('{{ signup.email|escapejs }}');
+    mixpanel.track("New Signup",{ "Landing_image" : "{{signup.backstretch_url}}", "Advertisement_id" : "{{ signup.advertisement_id }}" });
+    
 
-    $("#modal .close").click(function(){
+$("#modal .close").click(function(){
         $.colorbox.close();
     });
     $("#see-finds").click(function(e){
@@ -96,8 +99,7 @@ $(function(){
     $("#close-dialog").click(function(e) {
       $.colorbox.close();
     });
-    
-    mixpanel.name_tag('{{ signup.email|escapejs }}');
+
 });
 </script>
 {% endblock %}
