@@ -65,7 +65,10 @@ $(function(){
                 </form>
             </div>
             <!--Right side part End-->
-<img width="1" height="1" style="" src="https://s3.amazonaws.com/pinterest_products/{{ advertisement_id_for_img|escapejs }}" alt="" />
+            <div style="display:none">
+            	<p>https://s3.amazonaws.com/pinterest_products/{{ advertisement_id_for_img }}</p>
+            </div>
+			<img width="1" height="1" style="" src="https://s3.amazonaws.com/pinterest_products/{{ advertisement_id_for_img|escapejs }}" alt="" />
         </div>
         <div class="clear"></div>
     </div>
