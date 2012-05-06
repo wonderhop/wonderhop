@@ -44,7 +44,7 @@ def home(request):
                 signup = Signup(
                     email=email,
                     referring_user=referring_user,
-                    advertisement_id=request.session.get("advertisement_id", None),
+#                    advertisement_id=request.session.get("advertisement_id", None),
                     backstretch_url=request.POST.get("backstretch_url", None),
                 )
                 # Validate the email field, raise ValidationError if it fails
@@ -65,8 +65,8 @@ def home(request):
             context["error"] = "Invalid email address"
     
     for track_event in ["advertisement_id", "referral_key"]:
-        context["advertisement_id_for_img"] = request.session["advertisement_id"]
-#        tracked_key = "tracked_{0}".format(track_event)
+#        context["advertisement_id_for_img"] = request.session["advertisement_id"]
+        tracked_key = "tracked_{0}".format(track_event)
         if track_event in request.session and tracked_key not in request.session:
             context["event_{0}".format(track_event)] = request.session[track_event]
             request.session[tracked_key] = True
