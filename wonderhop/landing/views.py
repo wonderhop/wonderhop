@@ -91,7 +91,7 @@ def explanation(request, signup_id):
         
 def welcome(request, signup_id):
     signup = get_object_or_404(Signup, id=signup_id)
-    REFERRAL_LINK_TEXT = "Join me on WonderHop for up to 60% off unique decor, kitchen treats, and family finds to make life one-of-a-kind."
+    REFERRAL_LINK_TEXT = "Join me on WonderHop for unique decor, kitchen treats, and family finds to make life one-of-a-kind."
     
     if signup.incentive_plan is None:
         reward_tiers = []
